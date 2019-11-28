@@ -64,7 +64,8 @@
     app:layout_constraintRight_toRightOf="parent”  
     app:layout_constraintTop_toTopOf="parent"
     
-    四都设置是居中,  设置left 和 right 就是水平居中, top和bottom 就是垂直居中
+    四都设置是居中,  设置left 和 right 就是水平居中
+    光约束上面就是以上面对齐排列, 上下约束就是垂直居中
     
     layout_constraintHorizontal_bias 水平偏移比例
     
@@ -100,3 +101,34 @@
     layout_constraintGuide_begin 开始位置
     layout_constraintGuide_end 结束位置
     layout_constraintGuide_percent 距离顶部的百分比(orientation = horizontal时则为距离左边)
+
+
+## ANR文件的导出
+    adb bugreport; 运行后会在当前studio的根目录产生一个文件夹.
+
+## style的高度复用
+    以后编写UI时, 先看设计图, 那些是类似的重复的, 抽取一个style(方法)复用其代码
+
+## 成员变量
+    成员变量不要直接在方法中使用, 应该转成局部变量(去掉m前缀)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
