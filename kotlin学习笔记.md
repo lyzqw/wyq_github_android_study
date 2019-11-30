@@ -18,3 +18,12 @@
     }
 
 
+
+## for循环
+
+    for (i in 0 until childCount)  // 0 ~ childCount-1
+
+    for (i in 0..childCount)  // 0 ~ childCount
+
+
+
