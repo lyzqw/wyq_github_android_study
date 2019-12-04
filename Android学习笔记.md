@@ -59,9 +59,9 @@
     layout_constraintBaseline_toBaselineOf
     
     居中和偏移:
-    app:layout_constraintBottom_toBottomOf="parent"  
-    app:layout_constraintLeft_toLeftOf="parent"  
-    app:layout_constraintRight_toRightOf="parent”  
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent”
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     
     四都设置是居中,  设置left 和 right 就是水平居中
@@ -112,18 +112,155 @@
 ## 成员变量
     成员变量不要直接在方法中使用, 应该转成局部变量(去掉m前缀)
 
+## 裁剪图片
+   通过path构造各种形状, 利用canvas.clipPath()可以把一个bitmap裁剪各种样子.
+   Region可以保存路径, 利用drawRect绘制各种样子
+
+## canvas
+    裁剪画布禁用硬件加速
+    canvas在你执行draw的各种方法,对画布造成的影响的不可逆的;比如你对画布clip成绿色,随后操作都在这个绿色画布上了;
+    save()是用来保存当前画布的,把画布存到一个栈中; restore来弹出当前栈的画布,使用保存前的状态
+
+## Android 资源文件命名与使用
+    模块名-业务-控件描述-控件状态
+    other_login_btn_pressed
+    persional_login_activity
+
+    dimen 资源
+    module_horizontal_line_height
+
+   View 组件的资源 id 建议以 View 的缩写
+   progress_bar,ll,rl
+
+## 泛型
+  1.    泛型只是在编译期有效, 它只是利用编译器帮我们做类型转换
+  2.    泛型类是在创建对象时, 指明其类型; 泛型方法是调用其方法时指明泛型的具体类型
+
+    RootBean<你的实体类>通过类名的泛型 指定bean里data的返回数据类型
+    class RootBean<T>{
+        public T data;
+    }
+
+    //泛型类, 这里是泛型声明
+    class Generic<T extend Number>{
+        T t;
+         Generic(T t){ // 泛型会从构造传进来
+            this.t = t;
+         }
+    }
+
+    //泛型方法, 返回值左边是泛型声明
+    public static <T extend Number> T show(T t){
+
+    }
+
+## 泛型在继承中使用
+    ```
+     public class BaseGeneric<T extends Number> {
+
+        public T data;
+
+        public T getData() {
+            return data;
+        }
+        public void setData(T data) {
+            this.data = data;
+        }
+
+        //子类也可以定义自己的泛型, 如E 和 T 不关联; 泛型类的声明使用逗号隔开来声明多个
+        static class Generic<E extends String, T extends Integer> extends BaseGeneric<T> {
+            public E ChildData;
+            public void setChildData(E childData) {
+                ChildData = childData;
+            }
+            public E getChildData() {
+                return ChildData;
+            }
+        }
+
+        public static void main(String[] args) {
+            Generic generic = new Generic();
+            generic.setChildData("111");
+            generic.setData(222);    //父类已经限定类型;子类可以从写方法, 其范围只能是缩小
+            System.out.println(generic.getData());
+            System.out.println(generic.getChildData());
+        }
+    }
+    ```
+
+## 泛型在集合中的应用
+
+public class Fruit<T> {
+
+    public T field;
+
+    Fruit(T t) {
+        this.field = t;
+    }
+
+    public void setField(T field) {
+        this.field = field;
+    }
+
+    Fruit() {}
+
+    static class Apple extends Fruit<Integer> { //对类型缩小限制
+        @Override
+        public void setField(Integer field) {
+            super.setField(field);
+        }
+    }
+    public static void main(String[] args) {
+        //List<Fruit<Long>> list = new ArrayList<>();
+        //list.add(new Fruit<Long>());
+
+        //<List<Map<Apple, List<Map<String, Integer>>>>> 这么一堆只是表示Fruit的那个成员变量的类型而已
+        Fruit<List<Map<Apple, List<Map<String, Integer>>>>>
+            fruit = new Fruit<>();
+
+        //其成员变量是list集合
+        ArrayList<Map<Apple, List<Map<String, Integer>>>> list = new ArrayList<>();
+        fruit.field = list;
+
+        //map的key是一个对象, value是一个集合
+        HashMap<Apple, List<Map<String, Integer>>> map = new HashMap<>();
+        list.add(map);//集合的元素是map
+
+        map.put(new Apple(),new ArrayList<Map<String, Integer>>());
+        //遍历map取出key和value
+        map.forEach(new BiConsumer<Apple, List<Map<String, Integer>>>() {
+            @Override
+            public void accept(Apple apple, List<Map<String, Integer>> maps) {
+
+            }
+        });
+
+    }
+
+## 泛型通配符
+   当使用的具体类型不确定或是不需要使用类型的具体功能, 并不关心其类型, 可以用?表示未知类型
+
+     public static void main(String[] args) {
+           Generic<String,Integer> generic = new Generic();
+           generic.setChildData("111");
+           generic.setData(222);    //父类已经限定类型;子类可以从写方法, 其范围只能是缩小
+           System.out.println(generic.getData());
+           System.out.println(generic.getChildData());
+           Generic<?, ?> generic1 = Generic.getInstance();
+           show(generic1);
+       }
+
+       public static void show(Generic<?,?> generic){
+           System.out.println(generic.getChildData());
+       }
+
+        //虽然这里是<?> 但我们在BaseGeneric类声明时已经限定它只能是Number或Number的子类,所以可以调用number的方法
+       public static void show(BaseGeneric<?> generic){
+           System.out.println(generic.getData().intValue());
+       }
 
 
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
