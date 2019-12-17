@@ -5,14 +5,62 @@
     4. debugImplementation: 参与编译和打包, 只在debug有效
 
 ## 2. 学习gradle
-    build.gradle
-        apply:
-        android:
-        dependencies:
+
+    官网学习:https://developer.android.google.cn/studio/build/dependencies
+    APP目录下build.gradle分为三大块
+        apply: 设置插件
+
+        android:下面一般3个模块
+        1.defaultConfig:
+            applicationId 包名, 会替换清单文件里的package
+
+            JavaCompileOptions 配置Java编译的一些参数 例如我们使用 annotationProcessor 时所需要的参数
+            javaCompileOptions {
+                    annotationProcessorOptions{
+                        arguments = []
+                        classNames ''
+                        ....
+                    }
+                }
+
+   构建的配置:https://developer.android.google.cn/studio/build/build-variants.html
+        2.buildTypes: 构建的类型 debug,release一般2种
+
+        3.productFlavors: 产品风味每个下面的产品都可以定义不同的类型
+
+        4.dependencies:
+                依赖库 依赖本地jar,
+                本地model,
+                远程库
 
 
-    manifestPlaceholders字段 build.gradle 中可以使用manifestPlaceholders字段数组类型,
+    manifestPlaceholders字段 build.gradle的android{}中三大模块中可以使用manifestPlaceholders字段
     设置key:value 格式, 相当于定义字段了, 然后在AndroidManifest 直接$使用;方便了数据的统一管理
+
+    defaultConfig{
+            ... ...
+            manifestPlaceholders = [k_appName : "哈啰"]   // 设置默认的k_appName
+        }
+
+        // 依据debug/release变动的话设置如下
+        buildTypes {
+            debug {
+                manifestPlaceholders = [k_appName : "Debug哈啰"]
+            }
+        }
+
+        // 依据flavors变动的话设置如下
+        productFlavors {
+            autoTest {
+                manifestPlaceholders = [k_appName : "AT哈啰"]
+            }
+
+            appStore {
+                // do nothing
+            }
+        }
+     android:label="${k_appName}" // 这里取k_appName
+
 
 ## 3. 存储目录
     私有目录 data/data/包名/   是不需要权限直接就可以往里写文件的
@@ -271,23 +319,30 @@ public class Fruit<T> {
     用户的密码, 进行传输时, 就要使用加密算法, 这样黑客拿到加密后密码, 因为不可逆, 也无法知道明文(无法登陆你的账号)
 
 ## Android_id唯一标示
-    9.0系统
+    Android 9.0
     1.未签名的2个不同项目, 是相同的Android_id
     2.不同签名不同包, Android_id是不一样的
     3.同一个签名不同包, Android_id是一样的
 
-    6.0系统
-    1. Android_id固定的不变
+    Android 8
+    同签名不同包：id相同
+    不同签名不同包：id不同
 
-        public String getAndroid_id() {
-            String ANDROID_ID = "";
-            try {
-                ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return ANDROID_ID;
-        }
+    Android 7
+    同签名不同包：id相同
+    不同签名不同包：id相同
+
+    Android 10
+    同签名不同包：id相同
+    不同签名不同包：id不同
+
+    Android 6.0
+    Android_id固定的不变
+
+    Android 5.0
+    Android_id固定的不变
+
+    Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
 ## 注解
