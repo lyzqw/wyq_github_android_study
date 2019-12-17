@@ -1,11 +1,18 @@
-## compileOnly, api, debugImplementation, implementation的使用
+## 1. compileOnly, api, debugImplementation, implementation的使用
     1. compileOnly 只是在编译有效, 当前model不会参与打包. 你要确保别的model有在打包依赖它, 否则打包成apk没有代码; 一般主APP依赖一个库, 组件model可以使用此模式;
-    2. api: 共享效果, 参与编译和打包. 一个model使用api, 别的model依赖它, 也会享有依赖库里的库
+    2. api: 共享效果, 参与编译和打包. 一个model使用api, 主app项目依赖这个model, 也会享有依赖库(model)里依赖的库其中的代码
     3. implementation: 参与编译和打包: 独享效果. 只在当前model有效
     4. debugImplementation: 参与编译和打包, 只在debug有效
 
-## 2. manifestPlaceholders字段
-    build.gradle 中可以使用manifestPlaceholders字段数组类型, 设置key:value 格式, 相当于定义字段了, 然后在AndroidManifest 直接$使用;方便了数据的统一管理
+## 2. 学习gradle
+    build.gradle
+        apply:
+        android:
+        dependencies:
+
+
+    manifestPlaceholders字段 build.gradle 中可以使用manifestPlaceholders字段数组类型,
+    设置key:value 格式, 相当于定义字段了, 然后在AndroidManifest 直接$使用;方便了数据的统一管理
 
 ## 3. 存储目录
     私有目录 data/data/包名/   是不需要权限直接就可以往里写文件的
@@ -15,7 +22,7 @@
     默认这个字段是内联的意思, 就是你调用带inline方法时, 他的代码是移动到你的方法来一起执行, 避免了调用方法的进栈和出栈的操作
 
 ## 5. run和apply
-    如果你要是{}lambda表达式没有返回值, 可以使用run , this表示自己 方便设置参数. 否则使用apply方法返回值为自己
+    如果你要是{}lambda表达式没有返回值, 可以使用run , this表示自己 方便设置参数. 否则使用apply方法返回值为调用者自己
     如果lambda里如要传递自己本身使用带it的 如: also, let
 
 
@@ -70,7 +77,7 @@
     layout_constraintHorizontal_bias 水平偏移比例
     
     尺寸约束:
-    可以设置 0dp, 配合代替match_parent_;
+    可以设置 0dp, 配合代替match_parent;
     在使用layout_marginBottom时必须先约束自己的位置
   
     <android.support.constraint.ConstraintLayout 
@@ -133,8 +140,8 @@
    progress_bar,ll,rl
 
 ## 泛型
-  1.    泛型只是在编译期有效, 它只是利用编译器帮我们做类型转换
-  2.    泛型类是在创建对象时, 指明其类型; 泛型方法是调用其方法时指明泛型的具体类型
+   泛型只是在编译期有效, 它只是利用编译器帮我们做类型转换
+   泛型类是在创建对象时, 指明其类型; 泛型方法是调用其方法时指明泛型的具体类型
 
     RootBean<你的实体类>通过类名的泛型 指定bean里data的返回数据类型
     class RootBean<T>{
@@ -259,12 +266,37 @@ public class Fruit<T> {
            System.out.println(generic.getData().intValue());
        }
 
+## 加密算法
+    MD5,SHA-1、SHA-256 等常用算法是 hash算法, 逆向困难;
+    用户的密码, 进行传输时, 就要使用加密算法, 这样黑客拿到加密后密码, 因为不可逆, 也无法知道明文(无法登陆你的账号)
 
-}
+## Android_id唯一标示
+    9.0系统
+    1.未签名的2个不同项目, 是相同的Android_id
+    2.不同签名不同包, Android_id是不一样的
+    3.同一个签名不同包, Android_id是一样的
+
+    6.0系统
+    1. Android_id固定的不变
+
+        public String getAndroid_id() {
+            String ANDROID_ID = "";
+            try {
+                ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return ANDROID_ID;
+        }
 
 
+## 注解
+    eventBus 通过定义注解, register保存类名, 然后在post时, 通过类名利用反射找到对应的注解, 反射调用对应的方法, 传递参数
+    
+    Todo todoAnnotation = (Todo)method.getAnnotation(Todo.class);
 
-
+## 多渠道打包
+    buildtypes: 根据不同的编译环境打包 比如有debug、release、beta等环境参数
 
 
 
