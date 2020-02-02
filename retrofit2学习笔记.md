@@ -82,7 +82,7 @@
 ```
 
 ## Converter
-
+    Converter<F, T> 从F的类型会转换成T
     Converter<ResponseBody, R>接口的R是CallAdapter的泛型T
 
 

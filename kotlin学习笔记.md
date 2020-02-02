@@ -25,4 +25,6 @@
     for (i in 0..childCount)  // 0 ~ childCount
 
 
-
+## 泛型
+    PECS ? extend Fruit 生产者, 在kotlin中是out   
+    PECS ? super Apple 消费者, 在kotlin中是in   
