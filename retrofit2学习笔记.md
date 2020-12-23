@@ -58,22 +58,19 @@
 
     serviceMethodCache 复用创建过的ServiceMethod
 
-
-
-## 接口
-
 ### Call
     Call<T> 封装的请求的类型, T 代表返回的Bean对象类型
     execute()
     enqueue(CallBack<T> callback)
 
-### CallBack
-
-
 ## CallAdapter<T,R>接口的设计
 
 ```
-   T adapt(Call<R> call); T是定义的接口NetworkInterface对象, R是返回的Bean对象类型
+   T adapt(Call<R> call);
+   2020.5.10 T 其实包装call的一个实例, 当用户调用enqueue(rxjava中是subscribeActual, 随着你使用的callAdapter不同, 方法是不同的, 但内部都是使用call的enqueue), 
+   你在内部需要调用call的enqueue
+   
+   R是返回的Bean对象类型
    这接口用户可以自定义, 默认Android下是ExecutorCallAdapterFactory类,内部持有call和Execute对象
    CallAdapter默认2个方法, 有个Factory内部抽象类, 抽象方法 get()返回其实例
    CallAdapter用户通过build()Retrofit对象时传递进来,使用一个集合来维护;
@@ -101,3 +98,11 @@
 
 
 
+## 视频学习
+
+retrofit 是切换使用handler 使用
+
+单列
+门面
+建造
+动态代理

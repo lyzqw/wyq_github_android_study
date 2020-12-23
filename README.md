@@ -3,7 +3,8 @@
     2. api: 共享效果, 参与编译和打包. 一个model使用api, 主app项目依赖这个model, 也会享有依赖库(model)里依赖的库其中的代码
     3. implementation: 参与编译和打包: 独享效果. 只在当前model有效
     4. debugImplementation: 参与编译和打包, 只在debug有效
-
+    5. annotationProcessor: 编译时执行，不会打包到apk中
+     
 ##  学习gradle
 
     官网学习:https://developer.android.google.cn/studio/build/dependencies
@@ -123,7 +124,7 @@
     四都设置是居中,  设置left 和 right 就是水平居中
     光约束上面就是以上面对齐排列, 上下约束就是垂直居中
     
-    layout_constraintHorizontal_bias 水平偏移比例
+    layout_constraintHorizontal_bias 水平偏移比例, 0.3就是横向距离在0.3的位置上
     
     尺寸约束:
     可以设置 0dp, 配合代替match_parent;
@@ -158,6 +159,8 @@
     layout_constraintGuide_end 结束位置
     layout_constraintGuide_percent 距离顶部的百分比(orientation = horizontal时则为距离左边)
 
+    宽高比:
+    app:layout_constraintDimensionRatio="h,1:3"//宽是1,高是3
 
 ## ANR文件的导出
     adb bugreport; 运行后会在当前studio的根目录产生一个文件夹.
@@ -422,6 +425,7 @@
     10.专注工作一会, 就休息一会
     11.不要自认为用户的手机网络都是很好的
     12.要记得你写的程序不只在你的手机上运行
+    13.当看到一个复杂的交互要学会拆分处理, 拆分成一个个单独的效果对其合成就是最终结果;比如一个滑动效果, 看做是单独的view的偏移, 只不过是多次循环的效果 
 
 
 ## HandlerThread详解
@@ -451,18 +455,23 @@
         }
    
     
-## so库
-    
+## so库   
     so库是c++代码的类库, 想要调用这里的方法, 需要利用native方法
     
     
 ## bitmap复用
-
     bitmap复用不能减少程序使用内存的大小, 而是解决了频繁申请内存导致的内存抖动, 碎片问题;(要使用内存, 先去bitmap池子里复用bitmap使用过的内存 
     
+## gif_lib库来解决glide GIF 内存泄漏的问题
+    使用Android封装好的FrameSequenceDrawable来解决加载gif图片;
+    1. 下载FrameSequence的源码, 里面会有jni 和 Android support下 FrameSequence2个类都拷贝到我们的工程
+    2. 使用GlideModule注解, registry.prepend(Registry.BUCKET_GIF, InputStream.class, FrameSequenceDrawable.class,
+        new FrameSequenceDecoder(glide.getBitmapPool())); 添加FrameSequenceDrawable类和自定义的解码器,替换glide内置的
+    3. 实现ResourceDecoder接口, 使用FrameSequence来重写decode方法; glideExtions注解能扩展gif2方法
+    4. 每个GIF图会多30M,而且随时间越来越多
 
-
-
+## 自定义viewGroup 
+    通过onMeasure调用measureChildWithMargins()和setMeasuredDimension(), onLayout()不断累加子view的Height和left设置其位置
 
 
 
