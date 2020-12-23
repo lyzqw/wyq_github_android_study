@@ -45,13 +45,12 @@ class MainActivity : AppCompatActivity() {
         seekBarView.progress = 0
         seekBarView.max = 600
         seekBarView.setOnTouchListener { v, event ->
-            initPopWindow()
+
          return@setOnTouchListener false
         }
         seekBarView.setOnSeekBarChangeListener(object :
                 SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                popView.visibility = View.VISIBLE
                 val percent = progress * 1.0 / 600
                 val offset = (resources.displayMetrics.widthPixels * percent).toInt()
 
@@ -59,7 +58,8 @@ class MainActivity : AppCompatActivity() {
                 layoutParams.leftMargin = offset
                 target.layoutParams = layoutParams
 
-
+                initPopWindow()
+                popView.visibility = View.VISIBLE
                 mPopupWindow.update(target, mPopupWindow.width, mPopupWindow.height)
 
             }
