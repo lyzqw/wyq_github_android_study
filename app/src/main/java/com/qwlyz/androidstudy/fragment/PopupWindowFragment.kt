@@ -1,4 +1,4 @@
-package com.qwlyz.androidstudy
+package com.qwlyz.androidstudy.fragment
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.SeekBar
+import com.qwlyz.androidstudy.BaseFragment
+import com.qwlyz.androidstudy.R
 import kotlinx.android.synthetic.main.fragment_popupwindow.*
 
 /**
@@ -23,17 +25,9 @@ class PopupWindowFragment : BaseFragment() {
     lateinit var target: View
     lateinit var mPopupWindow: PopupWindow
 
+    override fun getLayoutId(): Int  = R.layout.fragment_popupwindow
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_popupwindow, null, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initData() {
         target = tv_hello_world
         val showView = show
 
