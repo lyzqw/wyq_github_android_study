@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +28,7 @@ class TopicAtTest {
     public static final char INVISIBLE_CHAR = '\u200b';
 
     public static void test() {
-        String content = "#aaa#bbb @ccc test unicode";
+        String content = "88..3331122111hhhh aaa#bbb#ccctest@unicode#  sss 555#666#fff@ klj";
 //        String contentOri="#aaa#bbb @ccc test unicode";
 //        String content="\u200b"  + contentOri + "\u200b" ;
         String[] split = content.split("@|#| ");
@@ -97,31 +99,37 @@ class TopicAtTest {
         }
     }
 
+
+
     public static void testRTL() {
-        String contentOri="#العرب #اكسبلور";
-        String content="\u200b"  + contentOri + "\u200b" ;
-//        String content = "fsf@aaa#bbb#@ccc test unicode";
-        String text = "[^\\s]+?#";
-        Pattern p = Pattern.compile(text);
-        Matcher m = p.matcher(content);
-        List<String> topicList = new ArrayList<>();
-        while (m.find()) {
-            String group = m.group();
-            if(group.contains("@")){
-                group = group.subSequence(group.lastIndexOf("@")+1,group.length()).toString();
+        List<String> tags = new ArrayList<>();
+        String content = "موسيقية#عربية#سعودية#مصرية #سوريا #سودانية#الأغاني";
+        System.out.println(isProbablyArabic("11موسيقي"));
+        String[] split = content.split("@|#| ");
+
+        List<String> tagsList = new LinkedList<>();
+        tags.add("#");
+        tags.add("@");
+        for (int i = 0; i < split.length; i++) {
+            String splitContent = split[i];
+            if (!hasSymbol(tags, content, splitContent)) {
+                continue;
             }
-            topicList.add(group);
+            char symbol = getSymbol(content, splitContent);
+            System.out.println("symbol : "+symbol);
+            tagsList.add(symbol + splitContent);
         }
-        System.out.println(Arrays.toString(topicList.toArray()));
+
+        System.out.println(Arrays.toString(tagsList.toArray()));
         int endIndex = content.length();
-        for (int i = topicList.size() - 1; i >= 0; i--) {
-            String topic = topicList.get(i);
+        for (int i = tagsList.size() - 1; i >= 0; i--) {
+            String topic = tagsList.get(i);
             int startIndex = content.lastIndexOf(topic, endIndex);
             endIndex = startIndex + topic.length();
             if (startIndex == -1) {
                 continue;
             }
-            System.out.println(topic +":start "+startIndex +" ==end "+endIndex);
+            System.out.println(topic + ":start " + startIndex + " ==end " + endIndex);
         }
     }
 
@@ -136,4 +144,37 @@ class TopicAtTest {
         }
         return index;
     }
+
+    private static boolean hasSymbol(List<String> tags, String content, String splitContent) {
+        if (splitContent.isEmpty()) return false;
+        try {
+            char format = getSymbol(content, splitContent);
+            if (tags.contains(format + "")) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static char getSymbol(String content, String splitContent) {
+        try {
+            return content.charAt(content.lastIndexOf(splitContent) - 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ' ';
+    }
+
+    public static boolean isProbablyArabic(String s) {
+        for (int i = 0; i < s.length();) {
+            int c = s.codePointAt(i);
+            if (c >= 0x0600 && c <= 0x06E0)
+                return true;
+            i += Character.charCount(c);
+        }
+        return false;
+    }
+
 }

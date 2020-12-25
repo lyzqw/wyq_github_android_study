@@ -25,10 +25,12 @@ class TopicAtFragment : BaseFragment() {
 
     override fun initData() {
         start.setOnClickListener {
-            val handleRTLTopic = handleRTLTopic(handleRTLAt())
-            text_topic.text = handleRTLTopic
+//            val handleRTLTopic = handleRTLTopic(handleRTLAt())
+//            text_topic.text = handleRTLTopic
+
+            text_topic.movementMethod = LinkMovementMethod.getInstance()
+            text_topic.text = handleRTLSpanText()
         }
-        text_topic.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun handleRTLTopic(builder: SpannableStringBuilder): SpannableStringBuilder {
@@ -139,4 +141,69 @@ class TopicAtFragment : BaseFragment() {
         return builder
     }
 
+    /**
+     * 只适配RTL
+     */
+    private fun handleRTLSpanText(): SpannableStringBuilder {
+        val tags: MutableList<String> = java.util.ArrayList()
+        val content = "موسيقية#عربية#سعودية#مصرية #سوريا #سودانية#الأغاني"
+        val split = content.split("@|#| ".toRegex())
+        val tagsList: MutableList<String> = LinkedList()
+        tags.add("#")
+        tags.add("@")
+        for (i in split.indices) {
+            val splitContent = split[i]
+            if (!hasSymbol(tags, content, splitContent)) {
+                continue
+            }
+            val symbol = getSymbol(content, splitContent)
+            println("symbol $symbol")
+            tagsList.add(symbol.toString() + splitContent)
+        }
+        val builder = SpannableStringBuilder(content)
+        var endIndex = content.length
+        for (i in tagsList.indices.reversed()) {
+            val topic = tagsList[i]
+            val startIndex = content.lastIndexOf(topic, endIndex)
+            endIndex = startIndex + topic.length
+            if (startIndex == -1) {
+                continue
+            }
+            builder.setSpan(object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    println(topic)
+                }
+                override fun updateDrawState(ds: TextPaint) {
+                    ds.color = resources.getColor(android.R.color.holo_purple)
+                }
+            }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return builder
+    }
+
+    private fun hasSymbol(
+        tags: List<String>,
+        content: String,
+        splitContent: String
+    ): Boolean {
+        if (splitContent.isEmpty()) return false
+        try {
+            val format = getSymbol(content, splitContent)
+            if (tags.contains(format.toString() + "")) {
+                return true
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return false
+    }
+
+    private fun getSymbol(content: String, splitContent: String): Char {
+        try {
+            return content[content.lastIndexOf(splitContent) - 1]
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ' '
+    }
 }
