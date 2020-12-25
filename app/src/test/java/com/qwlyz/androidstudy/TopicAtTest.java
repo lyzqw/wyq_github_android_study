@@ -98,13 +98,18 @@ class TopicAtTest {
     }
 
     public static void testRTL() {
-        String content = "aaa# bbb# @ccc test unicode";
-        String text = "[^\\s]+#";
+        String contentOri="#العرب #اكسبلور";
+        String content="\u200b"  + contentOri + "\u200b" ;
+//        String content = "fsf@aaa#bbb#@ccc test unicode";
+        String text = "[^\\s]+?#";
         Pattern p = Pattern.compile(text);
         Matcher m = p.matcher(content);
         List<String> topicList = new ArrayList<>();
         while (m.find()) {
             String group = m.group();
+            if(group.contains("@")){
+                group = group.subSequence(group.lastIndexOf("@")+1,group.length()).toString();
+            }
             topicList.add(group);
         }
         System.out.println(Arrays.toString(topicList.toArray()));
@@ -118,17 +123,6 @@ class TopicAtTest {
             }
             System.out.println(topic +":start "+startIndex +" ==end "+endIndex);
         }
-
-//        int endIndex = 0;
-//        for (int i = 0; i < topicList.size(); i++) {
-//            String topic = topicList.get(i);
-//            int startIndex = content.indexOf(topic, endIndex);
-//            endIndex = startIndex + topic.length();
-//            if (startIndex == -1) {
-//                continue;
-//            }
-//            System.out.println(topic +":start "+startIndex +" ==end "+endIndex);
-//        }
     }
 
     private static int getIndex(int position, String[] split) {

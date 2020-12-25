@@ -11,5 +11,5 @@ import org.junit.Assert.*
  */
 fun main() {
     TopicAtTest.testRTL();
-    TopicAtTest.test();
+//    TopicAtTest.test();
 }
