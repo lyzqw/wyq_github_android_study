@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/hs"
+    android:layout_height="100dp">
+
+
+    <LinearLayout
+        android:id="@+id/layout_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/teal_200"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/live"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="直播" />
+
+        <Button
+            android:id="@+id/voice"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_10"
+            android:text="语音" />
+
+        <Button
+            android:id="@+id/party"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="聚会" />
+
+
+    </LinearLayout>
+
+
+</HorizontalScrollView>
+

@@ -5,6 +5,199 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+
+
+    <!--
+        根据设计规范，我们用调色板定义了所有颜色，
+        具体业务中不要再定义新的色值。
+    -->
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_00">#00FFFFFF</color>
+    <color name="white_6">#10FFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_90">#E6FFFFFF</color>
+    <color name="white_95">#F2FFFFFF</color>
+    <color name="white_96">#F5FFFFFF</color>
+    <color name="white_97">#F7FFFFFF</color>
+    <color name="white_98">#FAFFFFFF</color>
+
+    <color name="main_bg">@color/white</color>
+    <color name="main_bg_10">@color/white_10</color>
+    <color name="main_bg_20">@color/white_20</color>
+    <color name="main_bg_30">@color/white_30</color>
+    <color name="main_bg_40">@color/white_40</color>
+    <color name="main_bg_50">@color/white_50</color>
+    <color name="main_bg_60">@color/white_60</color>
+    <color name="main_bg_70">@color/white_70</color>
+    <color name="main_bg_80">@color/white_80</color>
+    <color name="main_bg_95">@color/white_95</color>
+    <color name="main_bg_96">@color/white_96</color>
+    <color name="main_bg_97">@color/white_97</color>
+    <color name="main_bg_98">@color/white_98</color>
+
+    <color name="gray_18">#181818</color>
+    <color name="gray_19">#191919</color>
+    <color name="gray_21">#212121</color>
+    <color name="gray_22">#222222</color>
+    <color name="gray_25">#252525</color>
+    <color name="gray_29">#292929</color>
+    <color name="gray_33">#333333</color>
+    <color name="gray_35">#353535</color>
+    <color name="gray_40">#404040</color>
+    <color name="gray_51">#515151</color>
+    <color name="gray_53">#535353</color>
+    <color name="gray_66">#666666</color>
+    <color name="gray_81">#818181</color>
+    <color name="gray_85">#858585</color>
+    <color name="gray_94">#949497</color>
+    <color name="gray_99">#999999</color>
+    <color name="gray_aa">#AAAAAA</color>
+    <color name="gray_cc">#CCCCCC</color>
+    <color name="gray_ca">#CACACA</color>
+    <color name="gray_ea">#EAEAEA</color>
+    <color name="gray_ee">#EEEEEE</color>
+    <color name="gray_ee_ec_ea">#EEECEA</color>
+    <color name="gray_ef">#EFEFEF</color>
+    <color name="gray_ec">#ECECEC</color>
+    <color name="gray_3e">#3E3E3E</color>
+    <color name="gray_c2">#C2C2C2</color>
+    <color name="gray_d8">#D8D8D8</color>
+    <color name="gray_1a">#1A1A1A</color>
+    <color name="gray_da">#DADADA</color>
+    <color name="gray_fc_80">#CCFCFCFC</color>
+    <color name="gray_5f">#5F666E</color>
+    <color name="gray_d8_30">#4DD8D8D8</color>
+    <color name="gray_53_40">#66535353</color>
+    <color name="gray_a7">#a7aa49</color>
+    <color name="color_1f1f1f">#1F1F1F</color>
+    <color name="color_0C0C0C">#0C0C0C</color>
+    <color name="color_0C0C0C_40">#660C0C0C</color>
+    <color name="color_262626">#262626</color>
+    <color name="color_5E5E61">#5E5E61</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
+    <color name="color_999999">#999999</color>
+
+    <color name="black">#000000</color>
+    <color name="black_1">#30000000</color>
+    <color name="black_8">#14000000</color>
+    <color name="black_10">#1A000000</color>
+    <color name="black_15">#26000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_25">#40000000</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_70">#B3000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_90">#E6000000</color>
+    <color name="black_95">#F2000000</color>
+    <color name="black_0c">#0c0c0c</color>
+
+
+    <color name="thin_dark">#0C1824</color>
+    <color name="dark">#0D1824</color>
+    <color name="dark_10">#1A0D1824</color>
+    <color name="dark_20">#330D1824</color>
+    <color name="dark_30">#4D0D1824</color>
+    <color name="dark_40">#660D1824</color>
+    <color name="dark_50">#800D1824</color>
+    <color name="dark_60">#990D1824</color>
+    <color name="dark_70">#B30D1824</color>
+    <color name="dark_80">#CC0D1824</color>
+    <color name="dark_90">#E60D1824</color>
+
+    <color name="mid_blue">#2462A4</color>
+    <color name="mid_blue_10">#1A2462A4</color>
+    <color name="mid_blue_20">#332462A4</color>
+    <color name="mid_blue_24">#242462A4</color>
+    <color name="mid_blue_30">#4D2462A4</color>
+    <color name="mid_blue_40">#662462A4</color>
+    <color name="mid_blue_50">#802462A4</color>
+    <color name="mid_blue_60">#992462A4</color>
+    <color name="mid_blue_70">#B32462A4</color>
+    <color name="mid_blue_80">#CC2462A4</color>
+    <color name="mid_blue_90">#E62462A4</color>
+
+    <color name="dusty_orange">#FF7231</color>
+    <color name="cool_grey">#A7AAAD</color>
+    <color name="pale_grey">#e0dfdd</color>
+    <color name="slate_grey">#5F666E</color>
+    <color name="main_font_color">@color/dark</color>
+    <color name="main_red_color">#DE2831</color>
+    <color name="red_bg">#E1251B</color>
+    <color name="main_gray">#EEECEA</color>
+    <color name="main_tab_unselected_color">#5F666E</color>
+    <color name="driver_line">#E0DFDD</color>
+    <color name="grey_5E">#5E5E61</color>
+    <color name="delete_label">#ff3b30</color>
+    <color name="profile_share_border">#e0dfdd</color>
+    <color name="profile_share_bg">#f4f7fa</color>
+    <color name="blue_9e">#9eb6d2</color>
+    <color name="blue_81">#81a1c6</color>
+    <color name="video_preview_drag">#800C0C0C</color>
+    <color name="video_preview_expand">#FA0C0C0C</color>
+    <color name="avatar_inside_border">#14010101</color>
+    <color name="fdba46_bg">#FDBA46</color>
+
+    <color name="edit_profile_title">#FF5F666E</color>
+
+    <!--设置switch-->
+    <color name="setting_switch_thumb_on">@color/white</color>
+    <color name="setting_switch_thumb_off">@color/white</color>
+    <color name="setting_switch_track_on">@color/mid_blue</color>
+    <color name="setting_switch_track_off">@color/pale_grey</color>
+
+    <color name="gold">#FF9526</color>
+    <color name="silver">#E0E0DE</color>
+    <color name="bronze">#AF8A77</color>
+    <color name="shadow_color">#00000003</color>
+
+    <color name="action_sheet_desc">#8F8E94</color>
+    <color name="action_sheet_label">#007AFF</color>
+    <color name="action_sheet_delete">#FF3B30</color>
+    <color name="action_sheet_line_80">#CCE0DFDD</color>
+    <color name="action_sheet_line">#E0DFDD</color>
+    <color name="light_cell">#F4F7FA</color>
+    <color name="bg_preview_picture_cover">#0C0C0C</color>
+    <color name="light_grey">#e0dfdd</color>
+    <color name="color_like_tip">#FAf4f7fa</color>
+    <color name="color_153_153_153">#fa999999</color>
+
+
+    <!-- 以上的颜色为新 ui 的调色板，如有新的在上面添加, 以下的颜色值，需要改完删除掉 -->
+
+    <!-- 字体颜色 -->
+    <color name="color_8F8F8F">#8F8F8F</color>
+    <color name="color_404040">#404040</color>
+    <color name="middle_grey">#C2C2C2</color>
+    <color name="dark_grey">#5E5E61</color>
+    <color name="yellow">#FFE32F</color>
+    <color name="crop_yellow">#FEE53E</color>
+    <color name="grey_8e">#8E8E93</color>
+    <color name="yellow_click_copy">#FEE53E</color>
+    <color name="yellow_tip">#E6FFDE12</color>
+
+    <color name="beauty_setting_bg">#FA1F1F1F</color>
+    <color name="red_point">#F52929</color>
+    <color name="red_point_90">#E6F52929</color>
+    <color name="red">#f00</color>
+    <color name="red_de">#DE2831</color>
+
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="item_bg">#4b4b58</color>
+    <color name="gray_color">#000000</color>
+    <color name="color_1coolGrey">#FFA7AAAD</color>
+
+
 </resources>
