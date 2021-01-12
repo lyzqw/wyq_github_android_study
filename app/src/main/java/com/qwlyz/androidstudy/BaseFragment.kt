@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
  */
 abstract class BaseFragment : Fragment() {
 
+    var TAG = javaClass.simpleName.toString()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

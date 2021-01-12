@@ -58,7 +58,7 @@ class IosConverterAndroidFragment : BaseFragment() {
                     Log.e(TAG, "找不到的内容" + iosCn)
                 }
             }
-            writeJsonToSDcard(JSONObject(androidArMap).toString(),"android_ar.json")
+            writeJsonToSDcard(JSONObject(androidArMap as Map<*, *>).toString(),"android_ar.json")
             writeJsonToSDcard(Gson().toJson(disableList).toString(),"不满足的文案.json")
         }
     }

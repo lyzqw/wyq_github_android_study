@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_widget.*
 
 class WidgetActivity : AppCompatActivity() {
@@ -25,5 +26,13 @@ class WidgetActivity : AppCompatActivity() {
         title_view.text = pageWidget.title
         baseFragment.arguments = Bundle().also { it.putSerializable("PageWidget", pageWidget) }
         supportFragmentManager.beginTransaction().replace(R.id.container, baseFragment).commitNowAllowingStateLoss()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        Log.d("StorageFragment", "onRequestPermissionsResult: "+grantResults)
     }
 }
