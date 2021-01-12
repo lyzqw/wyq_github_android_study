@@ -2,11 +2,9 @@ package com.qwlyz.androidstudy.fragment
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
+import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter
+import com.ogaclejapan.smarttablayout.utils.ViewPagerItems
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
 import kotlinx.android.synthetic.main.custom_tab.view.*
@@ -24,18 +22,26 @@ class HorizontalScrollFragment : BaseFragment() {
 
     override fun initData() {
 
-        val adapter = FragmentPagerItemAdapter(
-            fragmentManager, FragmentPagerItems.with(context)
-                .add("直播", FlexBoxFragment::class.java)
-                .add("语音", IndicatorSeekBarFragment::class.java)
-                .add("聚会", IndicatorSeekBarFragment::class.java)
+//        val adapter = FragmentPagerItemAdapter(
+//            fragmentManager, FragmentPagerItems.with(context)
+//                .add("直播", FlexBoxFragment::class.java)
+//                .add("语音", IndicatorSeekBarFragment::class.java)
+//                .add("聚会", IndicatorSeekBarFragment::class.java)
+//                .create()
+//        )
+
+        val adapter = ViewPagerItemAdapter(
+            ViewPagerItems.with(context)
+                .add("", R.layout.custom_tab)
+                .add("title", R.layout.custom_tab)
                 .create()
         )
+
 
         view_pager.adapter = adapter
         tab_layout.setCustomTabView { container, position, adapter ->
             val rootView = View.inflate(context, R.layout.custom_tab, null)
-            rootView.custom_text.text = "直播"
+            rootView.custom_text.text = if(position==0) "直播" else "语音"
             return@setCustomTabView rootView
         }
         tab_layout.setViewPager(view_pager)
