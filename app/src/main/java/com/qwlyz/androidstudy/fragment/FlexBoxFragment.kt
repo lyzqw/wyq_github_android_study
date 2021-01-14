@@ -40,7 +40,7 @@ class FlexBoxFragment : BaseFragment() {
         val list_data = ArrayList<String>()
         for (i in 0..2) {
             list_data.add("71这里");
-            list_data.add("是设置");
+            list_data.add("2222是设置");
             list_data.add("的子元素");
             list_data.add("的属性");
             list_data.add("设置的");
@@ -55,9 +55,9 @@ class FlexBoxFragment : BaseFragment() {
             object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_flex, list_data) {
                 override fun convert(holder: BaseViewHolder, item: String) {
 
+                    holder.setGone(R.id.view_line,holder.layoutPosition != 1)
                     holder.setText(R.id.text, item)
-                    holder.getView<View>(R.id.layout_item).background =
-                        getDrawable(getRandomColor())
+                    holder.getView<View>(R.id.text).background = getDrawable(getRandomColor())
 
                 }
             }

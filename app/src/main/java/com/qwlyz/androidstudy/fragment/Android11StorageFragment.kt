@@ -1,17 +1,13 @@
 package com.qwlyz.androidstudy.fragment
 
 import android.Manifest
-import android.content.ContentUris
 import android.content.ContentValues
-import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.FileIOUtils
@@ -20,7 +16,6 @@ import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
 import kotlinx.android.synthetic.main.fragment_storage.*
 import java.io.File
-import java.io.FileInputStream
 
 /**
  *
@@ -29,7 +24,7 @@ import java.io.FileInputStream
 class Android11StorageFragment : BaseFragment() {
 
     var readPath =
-        "storage/emulated/0/DCIM/Screenshots/Screenshot_2020-12-17-19-36-57-439_com.vpb.popo.png"
+        "/storage/emulated/0/Android/data/com.vpb.popo/cache/crop/16101598311.jpg"
     var writeImage =
         "storage/emulated/0/DCIM/Screenshots/Screenshot_2020-12-17-19-36-57-123_com.vpb.popo.png"
     var writePath = "storage/emulated/0/DCIM/Screenshots/test_file.txt"
@@ -37,12 +32,12 @@ class Android11StorageFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.fragment_storage
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun initData() {
         request.setOnClickListener {
             val permissions = arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            , Manifest.permission.ACCESS_MEDIA_LOCATION
             )
             permissions.forEach {
                 if (ContextCompat.checkSelfPermission(
@@ -54,26 +49,36 @@ class Android11StorageFragment : BaseFragment() {
                     ActivityCompat.requestPermissions(activity, permissions, PERMISSION_CODE);
                 }
             }
-
         }
 
-        write.setOnClickListener {
-            Log.d(TAG, "initData: write12")
+        read_9.setOnClickListener {
+            Log.d(TAG, "initData: read")
+            val file = File(readPath)
+            image.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
+        }
+        write_9.setOnClickListener {
+            Log.d(TAG, "initData: write")
+            val writeFile = File(writePath)
+            if (!writeFile.exists()) {
+                writeFile.createNewFile()
+            }
+            FileIOUtils.writeFileFromString(writeFile, "haha")
+        }
+
+
+        read_11.setOnClickListener {
+            val file2 = File("/storage/emulated/0/Android/data/com.qwlyz.androidstudy/cache/ic_sex_radio_selected.png")
+            Log.d(TAG, "filesDir:.. "+ file2)
+            image.setImageBitmap(BitmapFactory.decodeFile(file2.absolutePath))
+        }
+
+        write_11.setOnClickListener {
             writeImage()
-//            val writeFile = File(writePath)
-//            if (!writeFile.exists()) {
-//                writeFile.createNewFile()
-//            }
-//            FileIOUtils.writeFileFromString(writeFile, "haha")
-//            Log.d(TAG, "initData: " + FileIOUtils.readFile2String(writeFile))
         }
 
-        read.setOnClickListener {
-            Log.d(TAG, "initData: read..")
-//            val file = File(readPath)
-//            image.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
-            readExternalFileByMediaStore()
-        }
+        select_photo.setOnClickListener {}
+
+        crop.setOnClickListener {  }
     }
 
     override fun onRequestPermissionsResult(
@@ -85,44 +90,6 @@ class Android11StorageFragment : BaseFragment() {
     }
 
 
-    private fun readExternalFileByMediaStore() {
-        var pathKey = ""
-        var pathValue = ""
-        pathKey = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            MediaStore.MediaColumns.DATA
-        } else {
-            MediaStore.MediaColumns.RELATIVE_PATH
-        }
-        // RELATIVE_PATH会在路径的最后自动添加/
-        pathValue = readPath
-        val cursor = activity!!.contentResolver.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            null,
-            if (pathKey.isEmpty()) {
-                null
-            } else {
-                "$pathKey LIKE ?"
-            },
-            if (pathValue.isEmpty()) {
-                null
-            } else {
-                arrayOf("%$pathValue%")
-            },
-            "${MediaStore.MediaColumns.DATE_ADDED} desc"
-        )
-
-        cursor?.also {
-            while (it.moveToNext()) {
-                val id = it.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID))
-                val displayName = it.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                Log.d("ScopedStorageActivity", "read external uri:$uri, name:$displayName")
-                Toast.makeText(Utils.getApp(), "$displayName", Toast.LENGTH_LONG).show()
-                image.setImageURI(uri)
-            }
-        }
-        cursor?.close()
-    }
 
     private fun writeImage() {
         val resolver = activity!!.contentResolver

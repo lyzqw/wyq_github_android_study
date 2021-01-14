@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/read"
-        android:text="read" />
+        android:text="request"
+        app:layout_constraintTop_toBottomOf="@+id/read" />
 
-    <Button
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/read_9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/write"
-        android:text="write"
+        android:text="9.0 read" />
+
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/write_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9.0 write"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
+
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/read_11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/read"
-        android:id="@+id/request"
-        android:text="request" />
+        android:text="file"
+        app:layout_constraintTop_toBottomOf="@+id/request" />
+
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/write_11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="file"
+        app:layout_constraintTop_toBottomOf="@+id/request" />
+
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/select_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="file"
+        app:layout_constraintTop_toBottomOf="@+id/request" />
+
+    <com.qwlyz.androidstudy.widget.StrongButton
+        android:id="@+id/crop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="file"
+        app:layout_constraintTop_toBottomOf="@+id/request" />
 
     <ImageView
         android:id="@+id/image"
@@ -35,4 +65,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
