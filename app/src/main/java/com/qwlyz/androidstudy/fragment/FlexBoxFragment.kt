@@ -54,7 +54,6 @@ class FlexBoxFragment : BaseFragment() {
         recycler_view.adapter =
             object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_flex, list_data) {
                 override fun convert(holder: BaseViewHolder, item: String) {
-
                     holder.setGone(R.id.view_line,holder.layoutPosition != 1)
                     holder.setText(R.id.text, item)
                     holder.getView<View>(R.id.text).background = getDrawable(getRandomColor())

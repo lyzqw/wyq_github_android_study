@@ -19,8 +19,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            keyAlias 'study.jks'
+            keyPassword '123456'
+            storeFile file('study.jks')
+            storePassword '123456'
+        }
+    }
+
+    buildTypes {
+        debug{
+            debuggable true
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                 'proguard-rules.pro'
@@ -56,5 +70,9 @@ dependencies {
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
 
+    //firbase
+    implementation 'com.google.firebase:firebase-core:18.0.0'
 
 }
+
+apply plugin: 'com.google.gms.google-services'

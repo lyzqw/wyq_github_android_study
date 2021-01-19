@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_widget.view.*
 
@@ -17,12 +18,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val instance = FirebaseAnalytics.getInstance(this)
 
         recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        recycler_view.adapter = WidgetAdapter()
+        recycler_view.adapter = WidgetAdapter(instance)
     }
 
-    class WidgetAdapter : RecyclerView.Adapter<WidgetViewHolder>() {
+    class WidgetAdapter(val instance: FirebaseAnalytics) : RecyclerView.Adapter<WidgetViewHolder>() {
         val dataList = PageWidget.values()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WidgetViewHolder {
@@ -36,10 +38,7 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: WidgetViewHolder, position: Int) {
             holder.itemView.text_view.text = dataList[position].title
             holder.itemView.setOnClickListener {
-                WidgetActivity.start(
-                    holder.itemView.context,
-                    dataList[position]
-                )
+                WidgetActivity.start(holder.itemView.context, dataList[position])
             }
         }
 
