@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.FileIOUtils
 import com.blankj.utilcode.util.Utils
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
+import com.qwlyz.androidstudy.SimpleActivity
 import kotlinx.android.synthetic.main.fragment_storage.*
 import java.io.File
 
@@ -78,7 +79,9 @@ class Android11StorageFragment : BaseFragment() {
 
         select_photo.setOnClickListener {}
 
-        crop.setOnClickListener {  }
+        crop.setOnClickListener {
+            SimpleActivity.start(activity!!)
+        }
     }
 
     override fun onRequestPermissionsResult(
