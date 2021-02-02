@@ -67,8 +67,11 @@
 
 ```
    T adapt(Call<R> call);
-   2020.5.10 T 其实包装call的一个实例, 当用户调用enqueue(rxjava中是subscribeActual, 随着你使用的callAdapter不同, 方法是不同的, 但内部都是使用call的enqueue), 
-   你在内部需要调用call的enqueue
+   2021.2.2 T 默认其实包装call的一个实例OkHttpCall
+   T 是你定义接口时, 它的方法返回类型 ExecutorCallbackCall -> OkHttpCall -> Call(你定义的), 进行层层包装
+
+   当用户调用enqueue (rxjava中是subscribeActual,随着你使用的callAdapter不同, 方法是不同的, 但内部都是使用call的enqueue),你在内部需要调用call的enqueue
+   如果你使用RxJava2CallAdapterFactory, 那么它返回的是Observable
    
    R是返回的Bean对象类型
    这接口用户可以自定义, 默认Android下是ExecutorCallAdapterFactory类,内部持有call和Execute对象

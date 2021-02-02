@@ -10,6 +10,7 @@ enum class PageWidget(val title: String, val pageWidgetClass: Class<*>) : Serial
     PopupWindowWidget("更新popupWindow学习", PopupWindowFragment::class.java),
     IndicatorSeekBarWidget("自定义IndicatorSeekBar", IndicatorSeekBarFragment::class.java),
     RTLTopicAtWidget("RTL话题", TopicAtFragment::class.java),
+    Retrofit2("学习retofit", Retrofit2Fragment::class.java),
     IOSConverterAndroid("ios文件转Android", IosConverterAndroidFragment::class.java),
     Android11Storage("Android11存储", Android11StorageFragment::class.java),
     StartActivity("activity_跳转", StartActivityFragment::class.java),
