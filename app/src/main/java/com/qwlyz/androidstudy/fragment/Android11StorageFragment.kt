@@ -7,11 +7,13 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.FileIOUtils
 import com.blankj.utilcode.util.Utils
+import com.bumptech.glide.Glide
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
 import com.qwlyz.androidstudy.SimpleActivity
@@ -77,10 +79,18 @@ class Android11StorageFragment : BaseFragment() {
             writeImage()
         }
 
-        select_photo.setOnClickListener {}
+        select_photo.setOnClickListener {
+
+        }
 
         crop.setOnClickListener {
             SimpleActivity.start(activity!!)
+        }
+
+        val url = "https://file.gchao.com/storage1/M00/00/14/rFfAFF_a83OAReLTAAALV2SwNJ4489.png"
+
+        image_logo.setOnClickListener {
+            Glide.with(it).load(url).into(it as ImageView)
         }
     }
 
