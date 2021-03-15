@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.android36kr.app.module.common.log.KrLog
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_widget.view.*
@@ -45,4 +46,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     class WidgetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        KrLog.close()
+    }
 }
