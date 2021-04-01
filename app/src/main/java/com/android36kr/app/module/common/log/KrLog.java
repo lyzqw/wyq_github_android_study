@@ -117,7 +117,7 @@ public class KrLog {
         // Log App info
         Log.i(KR_APP_TAG, getAppInfo());
         // Init crash handler
-        //CrashHandler.getInstance().init();
+        CrashHandler.getInstance().init();
     }
 
     /**
