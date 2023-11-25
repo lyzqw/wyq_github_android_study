@@ -2,14 +2,14 @@ package com.qwlyz.androidstudy.fragment
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
-import kotlinx.android.synthetic.main.custom_tab.view.*
-import kotlinx.android.synthetic.main.fragment_horizontal_scroll.*
-import kotlinx.android.synthetic.main.fragment_horizontal_view_pager.*
+import com.qwlyz.androidstudy.databinding.FragmentHorizontalViewPagerBinding
+import com.yuwq.libs_common.viewBinding
 
 
 /**
@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_horizontal_view_pager.*
  * @author lyz
  */
 class HorizontalScrollFragment : BaseFragment() {
+
+    private val binding by viewBinding(FragmentHorizontalViewPagerBinding::bind)
 
     override fun getLayoutId(): Int = R.layout.fragment_horizontal_view_pager
 
@@ -38,13 +40,13 @@ class HorizontalScrollFragment : BaseFragment() {
         )
 
 
-        view_pager.adapter = adapter
-        tab_layout.setCustomTabView { container, position, adapter ->
+        binding.viewPager.adapter = adapter
+        binding.tabLayout.setCustomTabView { container, position, adapter ->
             val rootView = View.inflate(context, R.layout.custom_tab, null)
-            rootView.custom_text.text = if(position==0) "直播" else "语音"
+            rootView.findViewById<TextView>(R.id.custom_text).text = if(position==0) "直播" else "语音"
             return@setCustomTabView rootView
         }
-        tab_layout.setViewPager(view_pager)
+        binding.tabLayout.setViewPager(binding.viewPager)
     }
 
     inner class TabButtonAdapter : PagerAdapter() {
@@ -67,18 +69,18 @@ class HorizontalScrollFragment : BaseFragment() {
         }
     }
 
-    private fun horizontal() {
-        hs.isFillViewport = true
-        hs.clipChildren = true
-        live.setOnClickListener {
-            //            val value: Int = ScreenUtils.getScreenWidth() / 2 - it.width
-            //            layout_tab.animate().translationX(value.toFloat()).start()
-            hs.scrollTo(300, 0)
-        }
-        voice.setOnClickListener {
-            hs.scrollTo(0, 0)
-            layout_tab.animate().translationX(0f).start()
-        }
-        party.setOnClickListener { }
-    }
+//    private fun horizontal() {
+//        hs.isFillViewport = true
+//        hs.clipChildren = true
+//        live.setOnClickListener {
+//            //            val value: Int = ScreenUtils.getScreenWidth() / 2 - it.width
+//            //            layout_tab.animate().translationX(value.toFloat()).start()
+//            hs.scrollTo(300, 0)
+//        }
+//        voice.setOnClickListener {
+//            hs.scrollTo(0, 0)
+//            layout_tab.animate().translationX(0f).start()
+//        }
+//        party.setOnClickListener { }
+//    }
 }

@@ -12,7 +12,9 @@ import android.widget.PopupWindow
 import android.widget.SeekBar
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
-import kotlinx.android.synthetic.main.fragment_popupwindow.*
+import com.qwlyz.androidstudy.databinding.FragmentHorizontalViewPagerBinding
+import com.qwlyz.androidstudy.databinding.FragmentPopupwindowBinding
+import com.yuwq.libs_common.viewBinding
 
 /**
  *
@@ -20,35 +22,37 @@ import kotlinx.android.synthetic.main.fragment_popupwindow.*
  */
 class PopupWindowFragment : BaseFragment() {
 
+    private val binding by viewBinding(FragmentPopupwindowBinding::bind)
+
     lateinit var seekBarView: SeekBar
     lateinit var popView: View
     lateinit var target: View
     lateinit var mPopupWindow: PopupWindow
 
-    override fun getLayoutId(): Int  = R.layout.fragment_popupwindow
+    override fun getLayoutId(): Int = R.layout.fragment_popupwindow
 
     override fun initData() {
-        target = tv_hello_world
-        val showView = show
+        target = binding.tvHelloWorld
+        val showView = binding.show
 
 
         showView.setOnClickListener {
             initPopWindow()
         }
 
-        update.setOnClickListener {
+        binding.update.setOnClickListener {
             Log.d("wqq", "onCreate: update..")
             popView.visibility = View.VISIBLE
 //            target.offsetLeftAndRight(100)
 //            mPopupWindow.update(target, mPopupWindow.width, mPopupWindow.height)
         }
 
-        dismiss.setOnClickListener {
+        binding.dismiss.setOnClickListener {
             popView.visibility = View.GONE
         }
 
 
-        seekBarView = seekBar
+        seekBarView = binding.seekBar
         seekBarView.progress = 0
         seekBarView.max = 600
         seekBarView.setOnTouchListener { v, event ->

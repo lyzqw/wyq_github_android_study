@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_widget.*
+import android.widget.TextView
 
 class WidgetActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class WidgetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_widget)
         val pageWidget = intent.getSerializableExtra("PageWidget") as PageWidget
         val baseFragment = pageWidget.pageWidgetClass.newInstance() as BaseFragment
-        title_view.text = pageWidget.title
+        findViewById<TextView>(R.id.title_view).text = pageWidget.title
         baseFragment.arguments = Bundle().also { it.putSerializable("PageWidget", pageWidget) }
         supportFragmentManager.beginTransaction().replace(R.id.container, baseFragment).commitNowAllowingStateLoss()
     }
