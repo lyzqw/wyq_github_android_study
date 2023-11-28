@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/darker_gray">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_margin="30dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="16dp"
+            android:text="相机信息授权提示"
+            android:textColor="#ff1a1823"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="286dp"
+            android:layout_height="72dp"
+            android:text="为了实现视频通话、语音通话、设置头像、设置个人主页背景、发送带图或视频的音乐动态和私信功能，需要访问您的拍摄照片和录制权限，您如果拒绝授权将无法使用上述功能。"
+            android:textColor="#ff1a1823"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

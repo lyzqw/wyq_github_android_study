@@ -46,7 +46,7 @@ dependencies {
     // ViewModel
     api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     // ViewModel utilities for Compose
-    api("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+//    api("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     // LiveData
     api("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     // Lifecycles only (without ViewModel or LiveData)
@@ -66,4 +66,9 @@ dependencies {
     // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
     api("androidx.lifecycle:lifecycle-process:$lifecycle_version")
 
+
+//    val activity_version = "1.6.0"
+//    // Kotlin
+//    api("androidx.activity:activity-ktx:$activity_version")
+//    api("androidx.activity:fragment-ktx:$activity_version")
 }

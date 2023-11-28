@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -12,7 +11,6 @@ import android.widget.PopupWindow
 import android.widget.SeekBar
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
-import com.qwlyz.androidstudy.databinding.FragmentHorizontalViewPagerBinding
 import com.qwlyz.androidstudy.databinding.FragmentPopupwindowBinding
 import com.yuwq.libs_common.viewBinding
 

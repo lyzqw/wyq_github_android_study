@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.android36kr.app.module.common.log.KrLog
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.qwlyz.androidstudy.databinding.ActivityMainBinding
 import com.qwlyz.androidstudy.widget.MessageEvent
 import com.yuwq.libs_common.viewBinding
