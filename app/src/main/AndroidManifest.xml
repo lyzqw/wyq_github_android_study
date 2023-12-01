@@ -28,7 +28,7 @@
         <activity android:name=".SimpleActivity" />
         <activity android:name=".WidgetActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".BindActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

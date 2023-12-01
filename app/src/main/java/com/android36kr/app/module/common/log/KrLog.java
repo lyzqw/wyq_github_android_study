@@ -72,13 +72,13 @@ public class KrLog {
     private final static String LOG_ZIP_FILENAME = "Kr_Z.zip";
 
     static {
-        try {
-            System.loadLibrary("stlport_shared");
-            System.loadLibrary("marsxlog");
-        } catch (Exception e) {
-            // https://bugly.qq.com/v2/crash-reporting/crashes/900012309/32108?pid=1
-            LogUtils.e(e.toString());
-        }
+//        try {
+//            System.loadLibrary("stlport_shared");
+//            System.loadLibrary("marsxlog");
+//        } catch (Exception e) {
+//            // https://bugly.qq.com/v2/crash-reporting/crashes/900012309/32108?pid=1
+//            LogUtils.e(e.toString());
+//        }
     }
 
     private KrLog() {

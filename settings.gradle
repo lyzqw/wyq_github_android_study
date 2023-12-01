@@ -1,3 +1,5 @@
 include ':app'
 rootProject.name = "WQAndroidStudy"
 include ':libs_common'
+include ':annotation'
+include ':compiler'

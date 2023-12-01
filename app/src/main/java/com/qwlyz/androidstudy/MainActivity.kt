@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android36kr.app.module.common.log.KrLog
 import com.qwlyz.androidstudy.databinding.ActivityMainBinding
 import com.qwlyz.androidstudy.widget.MessageEvent
+import com.wq.glide.annotation.compiler.BindView
 import com.yuwq.libs_common.viewBinding
 
 

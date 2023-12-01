@@ -1,6 +1,5 @@
 package com.qwlyz.androidstudy
 
-import com.google.firebase.analytics.FirebaseAnalytics
 
 /**
  *
