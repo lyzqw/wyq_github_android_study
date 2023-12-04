@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wq.glide.annotation.compiler.BindView;
+import com.wq.glide.annotation.compiler.OnClick;
 import com.yuwq.libs_common.ViewFinder;
 
 public class BindActivity extends AppCompatActivity {
@@ -26,8 +27,13 @@ public class BindActivity extends AppCompatActivity {
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("tag", "onClick: "+mTextView.getId());
+                Log.d("tag", "onClick: " + mTextView.getId());
             }
         });
+    }
+
+    @OnClick({R.id.btn1, R.id.btn2})
+    public void onButtonClick(View view) {
+        System.out.println("111: "+view.getId());
     }
 }

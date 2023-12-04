@@ -2,6 +2,7 @@ package com.wq.glide.compiler;
 
 import com.google.auto.service.AutoService;
 import com.wq.glide.annotation.compiler.BindView;
+import com.wq.glide.annotation.compiler.OnClick;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,12 +46,12 @@ public class ViewFinderProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        System.out.println("=======~~~~~+++++++++++");
+        System.out.println("=======~~process+++++++++");
         mAnnotatedClassMap.clear();
 
         try {
             processBindView(roundEnv);
-//            processOnClick(roundEnv);
+            processOnClick(roundEnv);
         } catch (IllegalArgumentException e) {
             error(e.getMessage());
             return true; // stop process
@@ -68,6 +69,14 @@ public class ViewFinderProcessor extends AbstractProcessor {
         return true;
     }
 
+    private void processOnClick(RoundEnvironment roundEnv) {
+        for (Element element: roundEnv.getElementsAnnotatedWith(OnClick.class)){
+            AnnotatedClass annotatedClass = getAnnotatedClass(element);
+            OnClickMethod method = new OnClickMethod(element);
+            annotatedClass.addMethod(method);
+        }
+    }
+
     private void processBindView(RoundEnvironment roundEnv) throws IllegalArgumentException {
         for (Element element : roundEnv.getElementsAnnotatedWith(BindView.class)) {
             // TODO: 16/8/4 检查 字段 的修饰符
@@ -76,14 +85,6 @@ public class ViewFinderProcessor extends AbstractProcessor {
             annotatedClass.addField(field);
         }
     }
-
-//    private void processOnClick(RoundEnvironment roundEnv) {
-//        for (Element element : roundEnv.getElementsAnnotatedWith(OnClick.class)) {
-//            AnnotatedClass annotatedClass = getAnnotatedClass(element);
-//            OnClickMethod method = new OnClickMethod(element);
-//            annotatedClass.addMethod(method);
-//        }
-//    }
 
     private AnnotatedClass getAnnotatedClass(Element element) {
         TypeElement classElement = (TypeElement) element.getEnclosingElement();
@@ -108,6 +109,7 @@ public class ViewFinderProcessor extends AbstractProcessor {
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> types = new LinkedHashSet<>();
         types.add(BindView.class.getCanonicalName());
+        types.add(OnClickMethod.class.getCanonicalName());
         return types;
     }
 }
