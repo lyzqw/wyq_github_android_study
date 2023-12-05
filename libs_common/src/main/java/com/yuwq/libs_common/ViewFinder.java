@@ -2,8 +2,13 @@ package com.yuwq.libs_common;
 
 import android.app.Activity;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import kotlin.jvm.JvmStatic;
 
 /**
  * Created by brucezz on 2016-07-27.
@@ -13,10 +18,15 @@ import java.util.Map;
 public class ViewFinder {
 
     private static final ActivityProvider PROVIDER_ACTIVITY = new ActivityProvider();
+    private static final FragmentProvider PROVIDER_FRAGMENT = new FragmentProvider();
     private static final Map<String, Finder> FINDER_MAP = new HashMap<>();
 
     public static void inject(Activity activity) {
         inject(activity, activity, PROVIDER_ACTIVITY);
+    }
+
+    public static void inject(Fragment fragment) {
+        inject(fragment, fragment, PROVIDER_FRAGMENT);
     }
 
     public static void inject(Object host, Object source, Provider provider) {

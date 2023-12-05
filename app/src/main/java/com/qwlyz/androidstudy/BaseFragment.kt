@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android36kr.app.module.common.log.KrLog
+import com.yuwq.libs_common.ViewFinder
 
 /**
  *
@@ -27,6 +28,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ViewFinder.inject(this)
         initView()
     }
 

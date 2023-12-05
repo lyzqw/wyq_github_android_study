@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             holder.itemView.findViewById<TextView>(R.id.text_view).text = dataList[position].title
             holder.itemView.setOnClickListener {
                 WidgetActivity.start(holder.itemView.context, dataList[position])
-                MessageEvent.report()
             }
         }
 
