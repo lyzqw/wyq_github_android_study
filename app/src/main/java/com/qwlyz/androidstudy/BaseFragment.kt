@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.android36kr.app.module.common.log.KrLog
 import com.yuwq.libs_common.ViewFinder
 
 /**
@@ -22,7 +21,7 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        KrLog.logAction(javaClass.simpleName, "CV")
+//        KrLog.logAction(javaClass.simpleName, "CV")
         return inflater.inflate(getLayoutId(), null, false)
     }
 
@@ -39,17 +38,17 @@ abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        KrLog.logAction(javaClass.simpleName, "R")
+//        KrLog.logAction(javaClass.simpleName, "R")
     }
 
     override fun onPause() {
         super.onPause()
-        KrLog.logAction(javaClass.simpleName, "P")
+//        KrLog.logAction(javaClass.simpleName, "P")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        KrLog.logAction(javaClass.simpleName, "DV")
+//        KrLog.logAction(javaClass.simpleName, "DV")
     }
 
     open fun initView(){}

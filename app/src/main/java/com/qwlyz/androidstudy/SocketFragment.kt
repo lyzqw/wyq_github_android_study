@@ -18,9 +18,11 @@ import java.net.URL
 class SocketFragment : BaseFragment() {
 
     private lateinit var socket: WebSocket
+
     private val binding by viewBinding(FragmentPermissionDialogBinding::bind)
 
     override fun getLayoutId(): Int = R.layout.fragment_socket
+
     override fun initData() {
 
     }

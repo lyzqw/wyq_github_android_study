@@ -8,10 +8,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.android36kr.app.module.common.log.KrLog
 import com.qwlyz.androidstudy.databinding.ActivityMainBinding
-import com.qwlyz.androidstudy.widget.MessageEvent
-import com.wq.glide.annotation.compiler.BindView
+import com.tencent.mars.xlog.Log
 import com.yuwq.libs_common.viewBinding
 
 
@@ -24,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.recyclerView.adapter = WidgetAdapter()
+
+        Log.i("MainActivity", Log.getSysInfo())
+        Log.i("MainActivity", "ok")
+        Log.i("MainActivity", "结束")
     }
 
     class WidgetAdapter : RecyclerView.Adapter<WidgetViewHolder>() {
@@ -51,6 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        KrLog.close()
+//        KrLog.close()
     }
 }

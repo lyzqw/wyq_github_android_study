@@ -39,6 +39,8 @@ public class ViewFinder {
                 FINDER_MAP.put(className, finder);
             }
             finder.inject(host, source, provider);
+        } catch (ClassNotFoundException e){
+//            e.printStackTrace();
         } catch (Exception e) {
             throw new RuntimeException("Unable to inject for " + className, e);
         }
