@@ -115,6 +115,8 @@ dependencies {
     debugApi("cat.ereza:customactivityoncrash:2.3.0")
     implementation 'com.tencent.mars:mars-xlog:1.2.5'
 
+    implementation 'com.qmuiteam:qmui:2.0.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

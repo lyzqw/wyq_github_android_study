@@ -26,11 +26,6 @@ class XlogFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_x_log
 
 
-//    @OnClick(R.id.upload)
-//    fun onClick1(v: View) {
-//
-//    }
-
     override fun initData() {
 
         binding.apply {

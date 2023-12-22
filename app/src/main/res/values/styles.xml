@@ -14,4 +14,20 @@
     </declare-styleable>
 
 
+    <style name="QMUI.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="AppTheme" parent="QMUI.NoActionBar">
+        <!--        <item name="android:editTextStyle">@style/EditTextStyle.Rtl</item>-->
+        <!--        <item name="android:textViewStyle">@style/TextViewStyle.Rtl</item>-->
+        <item name="qmui_common_list_item_chevron">@drawable/icon_black_arrow_right</item>
+    </style>
+
+    <style name="MainActivityTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
