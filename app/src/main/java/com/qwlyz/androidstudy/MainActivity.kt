@@ -50,9 +50,4 @@ class MainActivity : AppCompatActivity() {
 
     class WidgetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        KrLog.close()
-    }
 }

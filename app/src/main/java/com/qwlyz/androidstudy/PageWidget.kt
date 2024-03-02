@@ -8,6 +8,7 @@ enum class PageWidget(val title: String, val pageWidgetClass: Class<*>) : Serial
 
     HorizontalScrollWidget("在滚动布局里切换居中", HorizontalScrollFragment::class.java),
     PopupWindowWidget("更新popupWindow学习", PopupWindowFragment::class.java),
+    stick("stick", StickFragment::class.java),
     ViewModelWidget("更新viewmodel学习", ViewModelFragment::class.java),
     PermissionDialogWidget("PermissionDialog", PermissionDialogFragment::class.java),
     SocketWidget("socket", SocketFragment::class.java),
