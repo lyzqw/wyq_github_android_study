@@ -1,5 +1,6 @@
 package com.qwlyz.androidstudy
 
+import com.blankj.utilcode.util.ViewUtils.runOnUiThread
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,3 +14,15 @@ fun main() {
     TopicAtTest.testRTL();
 //    TopicAtTest.test();
 }
+
+
+inline fun hello(crossinline preaction: () -> Unit, noinline post: () -> Unit): () -> Unit {
+    preaction()
+    println("111")
+    post()
+    runOnUiThread({
+        preaction()
+    })
+    return post
+}
+

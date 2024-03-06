@@ -40,4 +40,5 @@ class WidgetActivity : AppCompatActivity() {
     ) {
         Log.d("StorageFragment", "onRequestPermissionsResult: " + grantResults)
     }
+
 }

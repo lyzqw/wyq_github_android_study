@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: WidgetViewHolder, position: Int) {
             holder.itemView.findViewById<TextView>(R.id.text_view).text = dataList[position].title
             holder.itemView.setOnClickListener {
+                if (holder.layoutPosition == 0){
+                    SimpleActivity.start(holder.itemView.context)
+                    return@setOnClickListener
+                }
                 WidgetActivity.start(holder.itemView.context, dataList[position])
             }
         }

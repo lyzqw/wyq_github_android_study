@@ -1,5 +1,6 @@
 package com.qwlyz.androidstudy
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -11,4 +12,8 @@ class TViewModel : ViewModel() {
     val dataLiveData = MutableLiveData<String>()
 
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d(TAG_LIFE, "onCleared: ")
+    }
 }
