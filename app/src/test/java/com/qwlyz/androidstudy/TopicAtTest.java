@@ -27,7 +27,12 @@ class TopicAtTest {
 
     public static final char INVISIBLE_CHAR = '\u200b';
 
+    int l,r=0;
+
     public static void test() {
+        int[] ans = new int[3];
+        int[] ans2 = new int[ans.length];
+
         String content = "88..3331122111hhhh aaa#bbb#ccctest@unicode#  sss 555#666#fff@ klj";
 //        String contentOri="#aaa#bbb @ccc test unicode";
 //        String content="\u200b"  + contentOri + "\u200b" ;

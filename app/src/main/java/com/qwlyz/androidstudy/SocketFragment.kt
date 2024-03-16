@@ -5,6 +5,8 @@ import android.view.View
 import com.qwlyz.androidstudy.databinding.FragmentPermissionDialogBinding
 import com.wq.glide.annotation.compiler.OnClick
 import com.yuwq.libs_common.viewBinding
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -14,6 +16,7 @@ import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import java.net.URL
+import kotlin.coroutines.CoroutineContext
 
 class SocketFragment : BaseFragment() {
 
@@ -27,10 +30,21 @@ class SocketFragment : BaseFragment() {
 
     }
 
+    class EEE : CoroutineExceptionHandler{
+        override val key: CoroutineContext.Key<*>
+            get() = TODO("Not yet implemented")
+
+        override fun handleException(context: CoroutineContext, exception: Throwable) {
+            TODO("Not yet implemented")
+        }
+
+    }
+
     @OnClick(R.id.btnInit)
     fun onClick1(v: View) {
         Log.d(TAG, "onClick1: init")
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(
+            context = Dispatchers.Main + EEE(), start = CoroutineStart.DEFAULT) {
             val request = Request.Builder()
 //            .url(URL("","",6666,""))
                 .url("wss://socket.gxmanq.com:6666")
