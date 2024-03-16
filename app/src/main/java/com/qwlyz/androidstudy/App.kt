@@ -6,6 +6,10 @@ import com.blankj.utilcode.util.PathUtils
 import com.blankj.utilcode.util.Utils
 import com.tencent.mars.xlog.Log
 import com.tencent.mars.xlog.Xlog
+import com.tencent.matrix.Matrix
+//import com.tencent.matrix.iocanary.IOCanaryPlugin
+//import com.tencent.matrix.iocanary.config.IOConfig
+
 
 /**
  * @author lyz
@@ -16,6 +20,28 @@ class App : Application() {
         super.onCreate()
         Utils.init(this)
         initXlog()
+        initMatrix()
+    }
+
+    private fun initMatrix() {
+        val builder: Matrix.Builder = Matrix.Builder(this) // build matrix
+
+        builder.pluginListener(TestPluginListener(this)) // add general pluginListener
+
+//        val dynamicConfig = DynamicConfigImplDemo() // dynamic config
+
+//        val ioCanaryPlugin = IOCanaryPlugin(
+//            IOConfig.Builder()
+//                .dynamicConfig(dynamicConfig)
+//                .build()
+//        )
+
+//        builder.plugin(ioCanaryPlugin)
+
+
+        Matrix.init(builder.build())
+
+//        ioCanaryPlugin.start()
     }
 
     private fun initXlog() {

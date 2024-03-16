@@ -1,7 +1,12 @@
 package com.qwlyz.androidstudy
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.util.Log
 import android.view.View
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.qwlyz.androidstudy.databinding.FragmentPermissionDialogBinding
 import com.wq.glide.annotation.compiler.OnClick
 import com.yuwq.libs_common.viewBinding
@@ -27,10 +32,15 @@ class SocketFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_socket
 
     override fun initData() {
-
+        LocalBroadcastManager.getInstance(requireActivity())
+            .registerReceiver(object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    Log.d(TAG, "onReceive: ")
+                }
+            }, IntentFilter())
     }
 
-    class EEE : CoroutineExceptionHandler{
+    class EEE : CoroutineExceptionHandler {
         override val key: CoroutineContext.Key<*>
             get() = TODO("Not yet implemented")
 
@@ -44,7 +54,8 @@ class SocketFragment : BaseFragment() {
     fun onClick1(v: View) {
         Log.d(TAG, "onClick1: init")
         GlobalScope.launch(
-            context = Dispatchers.Main + EEE(), start = CoroutineStart.DEFAULT) {
+            context = Dispatchers.Main + EEE(), start = CoroutineStart.DEFAULT
+        ) {
             val request = Request.Builder()
 //            .url(URL("","",6666,""))
                 .url("wss://socket.gxmanq.com:6666")
