@@ -50,6 +50,7 @@ android {
     buildTypes {
         debug {
             debuggable true
+            minifyEnabled false
             signingConfig signingConfigs.release
         }
         release {
@@ -132,7 +133,7 @@ dependencies {
 
     implementation 'com.qmuiteam:qmui:2.0.1'
     implementation 'androidx.startup:startup-runtime:1.1.1'
-    implementation 'androidx.work:work-runtime-ktx:2.6.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.0'
 
     implementation group: "com.tencent.matrix", name: "matrix-android-lib", version: MATRIX_VERSION, changing: true
     implementation group: "com.tencent.matrix", name: "matrix-android-commons", version: MATRIX_VERSION, changing: true
