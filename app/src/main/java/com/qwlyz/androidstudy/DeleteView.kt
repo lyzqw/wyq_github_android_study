@@ -15,9 +15,9 @@ class DeleteView @JvmOverloads constructor(
 
     private var mWidth: Float = 0f
     private var mHeight: Float = 0f
-    private var crossSize = SizeUtils.dp2px(10f).toFloat()
-    private var roundSize = SizeUtils.dp2px(8f).toFloat()
-    private var coreSize = SizeUtils.dp2px(20f).toFloat()
+    private var crossSize = SizeUtils.dp2px(8f).toFloat()
+    private var roundSize = SizeUtils.dp2px(6f).toFloat()
+    private var coreSize = SizeUtils.dp2px(12f).toFloat()
     private val mPath = Path()
 
     private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -70,12 +70,7 @@ class DeleteView @JvmOverloads constructor(
             lineTo(coreSize, zero)
             lineTo(coreSize, coreSize)
             lineTo(zero, coreSize)
-            lineTo(-coreSize/2, coreSize/2)
-
-//            moveTo(centerX, centerY - 2 * halfCrossSize)
-//            lineTo(centerX - 2 * halfCrossSize, centerY)
-//            lineTo(centerX, centerY + 2 * halfCrossSize)
-//            lineTo(centerX + 2 * halfCrossSize, centerY)
+            lineTo(-coreSize / 3, coreSize / 2)
             close()
         }
         canvas.drawPath(path, corePaint)
