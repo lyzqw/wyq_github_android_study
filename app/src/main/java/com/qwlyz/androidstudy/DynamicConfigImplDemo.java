@@ -11,7 +11,7 @@ import com.tencent.mrs.plugin.IDynamicConfig;
 import java.util.concurrent.TimeUnit;
 
 public class DynamicConfigImplDemo implements IDynamicConfig {
-    private static final String TAG = "Matrix.DynamicConfigImplDemo";
+    static final String TAG = "Matrix.DynamicConfigImplDemo";
 
     public DynamicConfigImplDemo() {
 
@@ -84,6 +84,20 @@ public class DynamicConfigImplDemo implements IDynamicConfig {
             MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
             return 2000;
         }
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
+        MatrixLog.i(TAG, key + ", before change:" + defLong + ", after change, value:" + 2000);
 
         return defLong;
     }

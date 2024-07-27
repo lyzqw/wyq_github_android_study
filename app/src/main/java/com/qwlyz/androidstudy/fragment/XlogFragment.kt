@@ -1,10 +1,12 @@
 package com.qwlyz.androidstudy.fragment
 
-import com.qwlyz.androidstudy.KUtils
+import android.animation.ValueAnimator
+import android.animation.ValueAnimator.AnimatorUpdateListener
 import com.blankj.utilcode.util.FileIOUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PathUtils
 import com.qwlyz.androidstudy.BaseFragment
+import com.qwlyz.androidstudy.KUtils
 import com.qwlyz.androidstudy.R
 import com.qwlyz.androidstudy.databinding.FragmentXLogBinding
 import com.tencent.mars.xlog.Log
@@ -13,7 +15,7 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.io.File
-import java.lang.RuntimeException
+
 
 /**
  *
@@ -27,11 +29,21 @@ class XlogFragment : BaseFragment() {
 
 
     override fun initData() {
-
         binding.apply {
             text.setOnClickListener {
-//                KrLog.logDebugInfo("==============start===========")
-
+//                val scoreText = arrayOf(".    ", ". .  ", ". . .")
+                val scoreText =
+                    arrayOf(".    ", ". .  ", ". . .", ". . . .", ". . . . .", ". . . . . .")
+                var valueAnimator: ValueAnimator? = null
+                if (valueAnimator == null) {
+                    valueAnimator = ValueAnimator.ofInt(0, 6).setDuration(3000)
+                    valueAnimator?.setRepeatCount(ValueAnimator.INFINITE)
+                    valueAnimator?.addUpdateListener { animation ->
+                        val i = animation.animatedValue as Int
+                        binding.textView.text = scoreText[i % scoreText.size]
+                    }
+                }
+                valueAnimator?.start()
                 Log.i("xlog", "==============start===========")
 
                 Log.appenderFlushSync(true)
@@ -48,7 +60,7 @@ class XlogFragment : BaseFragment() {
 
     fun sendEmail() {
 //        val logPath = context?.getExternalFilesDir(null)?.path + "/xlog"
-        val logPath = PathUtils.getInternalAppDataPath()+"/xlog"
+        val logPath = PathUtils.getInternalAppDataPath() + "/xlog"
 
         android.util.Log.d(TAG, "sendEmail: $logPath")
         Observable.just(0)

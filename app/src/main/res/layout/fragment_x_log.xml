@@ -40,4 +40,11 @@
             android:textColor="@color/white"
             android:textSize="13sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
