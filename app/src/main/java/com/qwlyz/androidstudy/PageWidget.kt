@@ -12,6 +12,7 @@ enum class PageWidget(val title: String, val pageWidgetClass: Class<*>) : Serial
     ViewModelWidget("更新viewmodel学习", ViewModelFragment::class.java),
     PermissionDialogWidget("PermissionDialog", PermissionDialogFragment::class.java),
     SocketWidget("socket", SocketFragment::class.java),
+    cardAnimation("卡片动画", CardAnimationFragment::class.java),
     XlogWidget("xlog", XlogFragment::class.java),
     Coordinator("Coordinator", CoordinatorLayoutFragment::class.java),
 //    GlideImageWidget("GlideImage学习", GlideImageFragment::class.java),
