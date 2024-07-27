@@ -1,31 +1,14 @@
 package com.qwlyz.androidstudy.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.util.Log
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.SizeUtils
-import com.blankj.utilcode.util.StringUtils
-import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView
-import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+import android.view.View
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
 import com.qwlyz.androidstudy.databinding.FragmentCardBinding
-import com.qwlyz.androidstudy.databinding.FragmentHorizontalViewPagerBinding
-import com.qwlyz.androidstudy.databinding.FragmentRetrofitBinding
 import com.yuwq.libs_common.viewBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 
 /**
  *
@@ -34,13 +17,8 @@ import retrofit2.http.GET
 class CardAnimationFragment : BaseFragment() {
 
     private val binding by viewBinding(FragmentCardBinding::bind)
+    private var isFrontViewVisible = true
 
-    private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl("http://wanandroid.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
 
     override fun getLayoutId(): Int = R.layout.fragment_card
 
@@ -49,32 +27,65 @@ class CardAnimationFragment : BaseFragment() {
             binding.imageTarget.scaleX = 0f
             binding.imageTarget.scaleY = 0f
             binding.imageTarget.rotation = 0f
-
             val d = (2.5 * 1000L).toLong()
-            // 创建缩放动画
-            val scaleXAnimator = ObjectAnimator.ofFloat(binding.imageTarget, "scaleX", 1f)
-            val scaleYAnimator = ObjectAnimator.ofFloat(binding.imageTarget, "scaleY", 1f)
-
-            // 创建旋转动画
-            val rotationAnimator = ObjectAnimator.ofFloat(binding.imageTarget, "rotation", 720f) // 720度，即两圈
-
-            // 动画时长
-            scaleXAnimator.duration = d
-            scaleYAnimator.duration = d
-            rotationAnimator.duration = d
-
-            // 设置插值器为 DecelerateInterpolator，实现速率先快后慢
-            val interpolator = AccelerateInterpolator()
-//            scaleXAnimator.interpolator = interpolator
-//            scaleYAnimator.interpolator = interpolator
-//            rotationAnimator.interpolator = interpolator
-
-            // 创建 AnimatorSet 来组合动画
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(scaleXAnimator, scaleYAnimator, rotationAnimator)
-            // 启动动画
-            animatorSet.start()
+            binding.imageTarget.animate().scaleY(1f).scaleX(1f).rotation(720f).setDuration(d)
+                .start()
         }
+
+        binding.mainFlContainer.setOnClickListener {
+            flipCard()
+        }
+        initAnimation()
+        setCameraDistance(); // 设置镜头距离
+    }
+
+
+    private fun setCameraDistance() {
+        var distance = 16000;
+        var scale = getResources().getDisplayMetrics().density * distance;
+        binding.front.flFront.setCameraDistance(scale);
+        binding.back.flBack.setCameraDistance(scale);
+    }
+
+    lateinit var inSet: AnimatorSet
+    lateinit var outSet: AnimatorSet
+    var back = false
+
+    private fun flipCard() {
+
+        if (back.not()) {
+            inSet.setTarget(binding.back.flBack)
+            outSet.setTarget(binding.front.flFront)
+        } else {
+            inSet.setTarget(binding.front.flFront)
+            outSet.setTarget(binding.back.flBack)
+        }
+
+        back = back.not()
+
+        inSet.start()
+        outSet.start()
+    }
+
+    private fun initAnimation() {
+        inSet = AnimatorSet()
+        val animator1 = ObjectAnimator.ofFloat(null, "rotationY", -180f, 0f);
+        var animator2 = ObjectAnimator.ofFloat(null, "alpha", 0.0f, 1f);
+        animator2.setStartDelay(250);
+        animator2.setDuration(0);
+        animator1.duration = 500
+
+        inSet.playTogether(animator1, animator2);
+
+
+        outSet = AnimatorSet()
+        val animator_ = ObjectAnimator.ofFloat(null, "rotationY", 0f, 180f);
+        val animator2_ = ObjectAnimator.ofFloat(null, "alpha", 1f, 0f);
+        animator2_.setStartDelay(250)
+        animator2_.setDuration(0);
+        animator_.duration = 500
+
+        outSet.playTogether(animator_, animator2_);
 
     }
 }

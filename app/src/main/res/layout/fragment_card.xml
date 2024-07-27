@@ -30,4 +30,19 @@
         android:src="@drawable/ic_card" />
 
 
+    <FrameLayout
+        android:id="@+id/main_fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/back"
+            layout="@layout/cell_card_back" />
+
+        <include
+            android:id="@+id/front"
+            layout="@layout/cell_card_front" />
+
+    </FrameLayout>
+
 </FrameLayout>
