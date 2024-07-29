@@ -17,8 +17,6 @@ import com.yuwq.libs_common.viewBinding
 class CardAnimationFragment : BaseFragment() {
 
     private val binding by viewBinding(FragmentCardBinding::bind)
-    private var isFrontViewVisible = true
-
 
     override fun getLayoutId(): Int = R.layout.fragment_card
 
