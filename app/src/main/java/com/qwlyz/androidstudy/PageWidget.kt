@@ -22,6 +22,6 @@ enum class PageWidget(val title: String, val pageWidgetClass: Class<*>) : Serial
 //    IOSConverterAndroid("ios文件转Android", IosConverterAndroidFragment::class.java),
 //    Android11Storage("Android11存储", Android11StorageFragment::class.java),
 //    StartActivity("activity_跳转", StartActivityFragment::class.java),
-//    FLexBoxWidget("横向滚动的流式布局", FlexBoxFragment::class.java),
+    FLexBoxWidget("横向滚动的流式布局", FlexBoxFragment::class.java),
 
 }

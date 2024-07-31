@@ -1,7 +1,7 @@
 package com.qwlyz.androidstudy.fragment
 
 import android.animation.ValueAnimator
-import android.animation.ValueAnimator.AnimatorUpdateListener
+import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.FileIOUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PathUtils
@@ -11,6 +11,12 @@ import com.qwlyz.androidstudy.R
 import com.qwlyz.androidstudy.databinding.FragmentXLogBinding
 import com.tencent.mars.xlog.Log
 import com.yuwq.libs_common.viewBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -31,30 +37,60 @@ class XlogFragment : BaseFragment() {
     override fun initData() {
         binding.apply {
             text.setOnClickListener {
-//                val scoreText = arrayOf(".    ", ". .  ", ". . .")
-                val scoreText =
-                    arrayOf(".    ", ". .  ", ". . .", ". . . .", ". . . . .", ". . . . . .")
-                var valueAnimator: ValueAnimator? = null
-                if (valueAnimator == null) {
-                    valueAnimator = ValueAnimator.ofInt(0, 6).setDuration(3000)
-                    valueAnimator?.setRepeatCount(ValueAnimator.INFINITE)
-                    valueAnimator?.addUpdateListener { animation ->
-                        val i = animation.animatedValue as Int
-                        binding.textView.text = scoreText[i % scoreText.size]
-                    }
-                }
-                valueAnimator?.start()
-                Log.i("xlog", "==============start===========")
+                //va()
 
-                Log.appenderFlushSync(true)
+                startInfiniteAnimation()
+
             }
 
             upload.setOnClickListener {
 //                KrLog.sendEmail(activity, null)
-                sendEmail()
+                //sendEmail()
+                job?.cancel()
             }
 
         }
+    }
+
+    // 创建一个Job对象来控制协程
+    var job: Job? = null
+
+    fun startInfiniteAnimation() {
+        if (job != null && job!!.isActive){
+            return
+        }
+        val scoreText = arrayOf(".    ", ". .  ", ". . .", ". . . .", ". . . . .", ". . . . . .")
+        val duration = 3000L
+        val interval = duration / scoreText.size
+        job = lifecycleScope.launch {
+            while (isActive) { // 无限循环，直到协程被取消
+                scoreText.forEachIndexed { index, _ ->
+                    binding.textView.text = scoreText[index % scoreText.size]
+                    delay(interval)
+                }
+            }
+        }
+
+        // 假设你有一个取消动画的逻辑
+        // scope.cancel() // 取消动画
+    }
+
+    private fun va() {
+        //                val scoreText = arrayOf(".    ", ". .  ", ". . .")
+        val scoreText = arrayOf(".    ", ". .  ", ". . .", ". . . .", ". . . . .", ". . . . . .")
+        var valueAnimator: ValueAnimator? = null
+        if (valueAnimator == null) {
+            valueAnimator = ValueAnimator.ofInt(0, 6).setDuration(3000)
+            valueAnimator?.setRepeatCount(ValueAnimator.INFINITE)
+            valueAnimator?.addUpdateListener { animation ->
+                val i = animation.animatedValue as Int
+                binding.textView.text = scoreText[i % scoreText.size]
+            }
+        }
+        valueAnimator?.start()
+        Log.i("xlog", "==============start===========")
+
+        Log.appenderFlushSync(true)
     }
 
 
