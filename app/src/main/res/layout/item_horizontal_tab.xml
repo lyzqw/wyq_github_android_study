@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qwlyz.androidstudy.FadeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/transparent"
     android:layout_height="40dp"
-    android:background="@android:color/holo_red_light"
     android:orientation="horizontal">
 
     <Button
@@ -13,14 +13,16 @@
         android:text="推荐" />
 
     <View
-        android:layout_width="20dp"
+        android:background="@android:color/holo_red_light"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <com.qwlyz.androidstudy.widget.StrongButton
+        android:layout_gravity="end"
         android:clickable="true"
         android:id="@+id/nearby"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="附近" />
 
-</LinearLayout>
+</com.qwlyz.androidstudy.FadeFrameLayout>

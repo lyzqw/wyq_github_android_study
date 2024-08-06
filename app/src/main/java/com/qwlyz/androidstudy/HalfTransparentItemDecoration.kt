@@ -1,34 +1,46 @@
 package com.qwlyz.androidstudy
 
+
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
 import androidx.recyclerview.widget.RecyclerView
 
 class HalfTransparentItemDecoration : RecyclerView.ItemDecoration() {
 
-    private val paint = Paint().apply {
-        alpha = 127  // Set transparency
-        style = Paint.Style.FILL
-    }
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDraw(c, parent, state)
 
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        val parentHeight = parent.height
-        val halfHeight = parentHeight / 2
+        val childCount = parent.childCount
+        val paint = Paint().apply {
+            alpha = 128 // 设置半透明度
+        }
 
-        // Draw transparent overlay
-        for (i in 0 until parent.childCount) {
+        for (i in 0 until childCount) {
             val child = parent.getChildAt(i)
-            val top = child.top
-            val bottom = child.bottom
+            val itemHeight = child.height
+            val halfHeight = itemHeight / 2
 
-            if (bottom <= halfHeight) {
-                // Draw transparent overlay on the top half
-                c.drawRect(0f, top.toFloat(), parent.width.toFloat(), bottom.toFloat(), paint)
-            } else if (top < halfHeight) {
-                // Draw partial transparent overlay
-                val height = halfHeight - top
-                c.drawRect(0f, top.toFloat(), parent.width.toFloat(), (top + height).toFloat(), paint)
-            }
+            // 画半透明的上半部分
+            val transparentRect = Rect(
+                child.left,
+                child.top,
+                child.right,
+                child.top + halfHeight
+            )
+            paint.color = Color.TRANSPARENT
+            c.drawRect(transparentRect, paint)
+
+            // 画正常的下半部分
+            val normalRect = Rect(
+                child.left,
+                child.top + halfHeight,
+                child.right,
+                child.bottom
+            )
+            paint.color = Color.BLACK // 设置颜色
+            c.drawRect(normalRect, paint)
         }
     }
 }

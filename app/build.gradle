@@ -146,6 +146,10 @@ dependencies {
     implementation group: "com.tencent.matrix", name: "matrix-hooks", version: MATRIX_VERSION, changing: true
     implementation group: "com.tencent.matrix", name: "matrix-backtrace", version: MATRIX_VERSION, changing: true
 
+
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
