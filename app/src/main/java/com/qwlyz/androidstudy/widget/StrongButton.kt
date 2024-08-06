@@ -19,20 +19,20 @@ class StrongButton  : androidx.appcompat.widget.AppCompatButton {
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int?) : super(context, attrs, defStyleAttr?:0)
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.d("liuyuzhe", "onTouchEvent:  true")
-        parent.requestDisallowInterceptTouchEvent(true)
-        return true
-    }
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        Log.d("liuyuzhe", "onFinishInflate: ")
-
-        setOnClickListener {
-            Log.d("liuyuzhe", "onFinishInflate: click")
-        }
-    }
+//    override fun onTouchEvent(event: MotionEvent?): Boolean {
+//        Log.d("liuyuzhe", "onTouchEvent:  true")
+//        parent.requestDisallowInterceptTouchEvent(true)
+//        return true
+//    }
+//
+//    override fun onFinishInflate() {
+//        super.onFinishInflate()
+//        Log.d("liuyuzhe", "onFinishInflate: ")
+//
+//        setOnClickListener {
+//            Log.d("liuyuzhe", "onFinishInflate: click")
+//        }
+//    }
 
 
 

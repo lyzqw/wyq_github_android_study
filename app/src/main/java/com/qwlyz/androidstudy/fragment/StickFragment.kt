@@ -67,6 +67,7 @@ class StickFragment : BaseFragment() {
 
 
     class NBAStarAdapter(val dataList: List<NBAStar>) : RecyclerView.Adapter<NBAStarViewHolder>() {
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NBAStarViewHolder {
 
             return NBAStarViewHolder(

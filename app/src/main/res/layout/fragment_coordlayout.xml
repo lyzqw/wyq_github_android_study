@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/text"
-        android:background="@color/red"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_splash_bg" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="fitXY"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/layoutTab"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:tabIndicatorColor="@color/color_0C0C0C_40"
-            app:tabIndicatorHeight="4dp"
-            app:tabSelectedTextColor="#000" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+    <com.qwlyz.androidstudy.ExpandableLayout
+        android:id="@+id/expandLayout"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="30dp"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false" />
+
+    </com.qwlyz.androidstudy.ExpandableLayout>
+
+
+    <Button
+        android:id="@+id/btn_expand"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />/>
+        android:text="展开" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/btn_ex"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="折叠" />
+
+</FrameLayout>
