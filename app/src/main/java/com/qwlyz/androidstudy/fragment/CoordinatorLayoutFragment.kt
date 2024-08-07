@@ -1,6 +1,7 @@
 package com.qwlyz.androidstudy.fragment
 
 import android.util.Log
+import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ScreenUtils
@@ -26,6 +27,13 @@ class CoordinatorLayoutFragment : BaseFragment() {
 
     lateinit var adapter: BaseQuickAdapter<String, BaseViewHolder>
 
+    // 滑动方向常量
+    private val SCROLL_UP = 1
+    private val SCROLL_DOWN = -1
+
+    // 用于记录触摸事件的开始位置
+    private var startY = 0f
+
     private val binding by viewBinding(FragmentCoordlayoutBinding::bind)
 
     override fun getLayoutId(): Int = R.layout.fragment_coordlayout
@@ -44,18 +52,45 @@ class CoordinatorLayoutFragment : BaseFragment() {
         for (i in 0..3) {
             data.add(i.toString())
         }
-        binding.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                Log.d(TAG, "onScrolled: $dy")
+//        binding.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                Log.d(TAG, "onScrolled: $dy")
+//
+//                if (dy > 0 || dy == 0) {
+//                    binding.rv.isFadingEnabled = true
+//                } else {
+//                    binding.rv.isFadingEnabled = false
+//                }
+//            }
+//        })
 
-                if (dy > 0 || dy == 0) {
-                    binding.rv.isFadingEnabled =  true
-                } else {
-                    binding.rv.isFadingEnabled  = false
+        binding.rv.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // 记录触摸事件的开始位置
+                    startY = event.y
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    // 计算当前滑动的方向
+                    val currentY = event.y
+                    val deltaY = currentY - startY
+
+                    // 判断滑动方向
+                    if (deltaY > 0) {
+                        // 向下滑动
+                        onScrollDirection(SCROLL_DOWN)
+                    } else if (deltaY < 0) {
+                        // 向上滑动
+                        onScrollDirection(SCROLL_UP)
+                    }
+                    // 更新开始位置
+                    startY = currentY
                 }
             }
-        })
+            // 返回 false 以便其他事件处理程序也可以处理这些事件
+            false
+        }
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
         binding.rv.layoutManager = layoutManager
 
@@ -157,4 +192,20 @@ class CoordinatorLayoutFragment : BaseFragment() {
     }
 
     var can = false
+
+    // 处理滑动方向的逻辑
+    private fun onScrollDirection(direction: Int) {
+        when (direction) {
+            SCROLL_UP -> {
+                // 处理向上滑动
+                println("Scrolling Up 渐隐")
+                binding.rv.isFadingEnabled = true
+            }
+            SCROLL_DOWN -> {
+                // 处理向下滑动
+                println("Scrolling Down  显示全部")
+                binding.rv.isFadingEnabled = false
+            }
+        }
+    }
 }

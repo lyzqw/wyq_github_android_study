@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,6 +71,7 @@ public class FadingRecyclerView extends RecyclerView {
     public void setFadingEnabled(boolean enabled) {
         if (isFadingEnabled != enabled) {  // 只有在状态变化时才进行重绘
             isFadingEnabled = enabled;
+            Log.d("liuyuzhe", "重新绘制");
             invalidate();  // 重新绘制视图
         }
     }
