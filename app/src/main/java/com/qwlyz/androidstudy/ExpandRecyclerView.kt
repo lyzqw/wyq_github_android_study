@@ -13,9 +13,9 @@ class ExpandRecyclerView @JvmOverloads constructor(
 //        return true // 启用垂直方向的 fadingEdge
 //    }
 //
-    override fun getTopFadingEdgeStrength(): Float {
-        return 1.0f // 禁用顶部 fadingEdge
-    }
+//    override fun getTopFadingEdgeStrength(): Float {
+//        return 1.0f // 禁用顶部 fadingEdge
+//    }
 //
 //    override fun getBottomFadingEdgeStrength(): Float {
 //        return 0.0f // 启用底部 fadingEdge
