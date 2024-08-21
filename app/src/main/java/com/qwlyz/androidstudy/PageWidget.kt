@@ -15,6 +15,7 @@ enum class PageWidget(val title: String, val pageWidgetClass: Class<*>) : Serial
     cardAnimation("卡片动画", CardAnimationFragment::class.java),
     XlogWidget("xlog", XlogFragment::class.java),
     Coordinator("Coordinator", CoordinatorLayoutFragment::class.java),
+    exoplay("exoplay", ExoplayerTextFragment::class.java),
 //    GlideImageWidget("GlideImage学习", GlideImageFragment::class.java),
 //    IndicatorSeekBarWidget("自定义IndicatorSeekBar", IndicatorSeekBarFragment::class.java),
 //    RTLTopicAtWidget("RTL话题", TopicAtFragment::class.java),
