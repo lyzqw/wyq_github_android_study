@@ -48,7 +48,7 @@ class Retrofit2Fragment : BaseFragment() {
                     }
 
                     override fun onResponse(call: Call<WQQAny>, response: Response<WQQAny>) {
-                        LogUtils.d("success: ${call.request().url()}")
+                        LogUtils.d("success: ${call.request().url}")
                     }
                 })
         }

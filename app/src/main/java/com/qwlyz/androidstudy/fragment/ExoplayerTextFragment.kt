@@ -1,30 +1,28 @@
 package com.qwlyz.androidstudy.fragment
 
+import android.content.Context
 import android.graphics.Paint
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.widget.TextView
+import com.blankj.utilcode.util.FileIOUtils
+import com.blankj.utilcode.util.PathUtils
 import com.blankj.utilcode.util.ScreenUtils
-import com.blankj.utilcode.util.ThreadUtils
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.qwlyz.androidstudy.AudioTrackPlayer
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.R
 import com.qwlyz.androidstudy.databinding.FragmentExoplayerTextBinding
 import com.yuwq.libs_common.viewBinding
-import java.io.InputStream
+import okio.ByteString.Companion.toByteString
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 
 /**
  *
  * @author lyz
  */
 class ExoplayerTextFragment : BaseFragment() {
-    companion object{
+    companion object {
         const val TAG = "ExoplayerTextFragment"
     }
 
@@ -34,8 +32,35 @@ class ExoplayerTextFragment : BaseFragment() {
     private val binding by viewBinding(FragmentExoplayerTextBinding::bind)
 
     override fun getLayoutId(): Int = R.layout.fragment_exoplayer_text
-    lateinit var audioTextSynchronizer: AudioTextSynchronizer
+    lateinit var audioTextSynchronizer: AudioTextSynchronizer2
     lateinit var stringList: List<String>
+
+
+
+    fun readAssetAsByteArray(context: Context, assetFileName: String): ByteArray? {
+        val assetManager = context.assets
+        var byteArray: ByteArray? = null
+
+        try {
+            val inputStream = assetManager.open(assetFileName)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            val buffer = ByteArray(1024)
+            var length: Int
+
+            while (inputStream.read(buffer).also { length = it } != -1) {
+                byteArrayOutputStream.write(buffer, 0, length)
+            }
+
+            byteArray = byteArrayOutputStream.toByteArray()
+            byteArrayOutputStream.close()
+            inputStream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return byteArray
+    }
+
 
     override fun initData() {
         binding.btnExpand.setOnClickListener {
@@ -45,54 +70,61 @@ class ExoplayerTextFragment : BaseFragment() {
                 binding.text
             )
 
-            player = ExoPlayer.Builder(requireContext()).build()
-            val dataSourceFactory = DefaultDataSourceFactory(requireContext(), "your-user-agent")
-            val mediaSourceFactory = DefaultMediaSourceFactory(dataSourceFactory)
-            val mediaItem = MediaItem.Builder().setUri("asset:///calling.mp3").build()
-            player.setMediaSource(mediaSourceFactory.createMediaSource(mediaItem))
-            player.prepare()
-            player.play()
+//            val bytes = readAssetAsByteArray(requireContext(),"calling.mp3")!!
+            val audioTrackPlayer = AudioTrackPlayer()
+            audioTextSynchronizer = AudioTextSynchronizer2(audioTrackPlayer, stringList, binding)
+
+            val outputFilePath = "${PathUtils.getInternalAppCachePath()}/1724224970949_audio.pcm"
+            val bytes = FileIOUtils.readFile2BytesByStream(outputFilePath).toByteString()
+            audioTrackPlayer.play(bytes.hex())
+            audioTextSynchronizer.startUpdatingText()
+
+//            player = ExoPlayer.Builder(requireContext()).build()
+//            val dataSourceFactory = DefaultDataSourceFactory(requireContext(), "your-user-agent")
+//            val mediaSourceFactory = DefaultMediaSourceFactory(dataSourceFactory)
+//            val mediaItem = MediaItem.Builder().setUri("asset:///calling.mp3").build()
+//            player.setMediaSource(mediaSourceFactory.createMediaSource(mediaItem))
+//            player.prepare()
+//            player.play()
 
 
 
-            audioTextSynchronizer = AudioTextSynchronizer(player, stringList, binding)
 
             // Add a listener to update text based on playback
-            player.addListener(object : Player.Listener {
-                override fun onPlaybackStateChanged(playbackState: Int) {
-                    if (playbackState == Player.STATE_READY) {
-                        player.playWhenReady = true
-                        Log.d(TAG, "startUpdatingText: ")
-                        audioTextSynchronizer.startUpdatingText()
-                    } else if (playbackState == Player.STATE_ENDED){
-                        Log.d(TAG, "stopUpdatingText: ")
-                        audioTextSynchronizer.stopUpdatingText()
-                    }
-                }
-
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    Log.d(TAG, "onIsPlayingChanged: $isPlaying")
-                    if (isPlaying) {
-                        updateTextBasedOnPlayback()
-                    }
-                }
-
-                override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-                    super.onPlayerStateChanged(playWhenReady, playbackState)
-                    Log.d(TAG, "onPlaybackStateChanged.currentPosition: $playbackState")
-
-//                    val duration = player.duration
-//                    val currentPosition = player.currentPosition
-//                    Log.d(TAG, "onPlaybackStateChanged.duration: $duration")
-//                    binding.text.text = stringList[currentIndex]
-//                    currentIndex++
-//                    if (currentPosition > duration / stringList.size * currentIndex && currentIndex < stringList.size) {
+//            player.addListener(object : Player.Listener {
+//                override fun onPlaybackStateChanged(playbackState: Int) {
+//                    if (playbackState == Player.STATE_READY) {
+//                        player.playWhenReady = true
+//                        Log.d(TAG, "startUpdatingText: ")
+//                        audioTextSynchronizer.startUpdatingText()
+//                    } else if (playbackState == Player.STATE_ENDED) {
+//                        Log.d(TAG, "stopUpdatingText: ")
+//                        audioTextSynchronizer.stopUpdatingText()
 //                    }
-                }
-
-
-
-            })
+//                }
+//
+//                override fun onIsPlayingChanged(isPlaying: Boolean) {
+//                    Log.d(TAG, "onIsPlayingChanged: $isPlaying")
+//                    if (isPlaying) {
+//                        updateTextBasedOnPlayback()
+//                    }
+//                }
+//
+//                override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+//                    super.onPlayerStateChanged(playWhenReady, playbackState)
+//                    Log.d(TAG, "onPlaybackStateChanged.currentPosition: $playbackState")
+//
+////                    val duration = player.duration
+////                    val currentPosition = player.currentPosition
+////                    Log.d(TAG, "onPlaybackStateChanged.duration: $duration")
+////                    binding.text.text = stringList[currentIndex]
+////                    currentIndex++
+////                    if (currentPosition > duration / stringList.size * currentIndex && currentIndex < stringList.size) {
+////                    }
+//                }
+//
+//
+//            })
 
         }
     }

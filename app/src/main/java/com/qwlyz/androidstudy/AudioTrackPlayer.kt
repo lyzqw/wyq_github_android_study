@@ -6,6 +6,9 @@ import android.media.AudioFormat.CHANNEL_OUT_MONO
 import android.media.AudioFormat.ENCODING_PCM_16BIT
 import android.media.AudioTrack
 import android.os.SystemClock
+import android.util.Log
+import com.blankj.utilcode.util.ThreadUtils
+import kotlin.properties.Delegates
 
 class AudioTrackPlayer {
 
@@ -32,17 +35,27 @@ class AudioTrackPlayer {
             )
             .build()
         audioTrack!!.play()
+
     }
 
     fun play(pcm: String) {
         val hexStringToByteArray = hexStringToByteArray(pcm)
-        audioTrack?.notificationMarkerPosition = hexStringToByteArray.size
-        audioTrack?.positionNotificationPeriod = hexStringToByteArray.size
-        audioTrack!!.write(hexStringToByteArray, 0, hexStringToByteArray.size)
+        duration = calculateDuration(hexStringToByteArray.size, sampleRate, bytesPerSample, channelCount)
         startTime = SystemClock.elapsedRealtime()
+        Log.d("ExoplayerTextFragment", "play: $duration")
+        ThreadUtils.getCachedPool().execute {
+            audioTrack?.notificationMarkerPosition = hexStringToByteArray.size
+            audioTrack?.positionNotificationPeriod = hexStringToByteArray.size
+            audioTrack!!.write(hexStringToByteArray, 0, hexStringToByteArray.size)
+        }
     }
 
+    var duration by Delegates.notNull<Long>()
+
     fun play(hexStringToByteArray: ByteArray) {
+
+        duration =
+            calculateDuration(hexStringToByteArray.size, sampleRate, bytesPerSample, channelCount)
 //        val hexStringToByteArray = hexStringToByteArray(pcm)
 //        audioTrack?.notificationMarkerPosition = hexStringToByteArray.size
 //        audioTrack?.positionNotificationPeriod = hexStringToByteArray.size
