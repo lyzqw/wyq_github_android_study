@@ -1,17 +1,23 @@
 package com.qwlyz.androidstudy.fragment
 
 import android.animation.ValueAnimator
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.FileIOUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PathUtils
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.davemorrissey.labs.subscaleview.ImageSource
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.qwlyz.androidstudy.BaseFragment
 import com.qwlyz.androidstudy.KUtils
 import com.qwlyz.androidstudy.R
 import com.qwlyz.androidstudy.databinding.FragmentXLogBinding
 import com.tencent.mars.xlog.Log
 import com.yuwq.libs_common.viewBinding
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -29,24 +35,72 @@ import java.io.File
  */
 class XlogFragment : BaseFragment() {
 
+    private val url = "https://picsum.photos/id/866/4704/3136"
+    val url2 = "https://picsum.photos/id/237/200/300"
+
     private val binding by viewBinding(FragmentXLogBinding::bind)
 
     override fun getLayoutId(): Int = R.layout.fragment_x_log
 
 
     override fun initData() {
+        lifecycleScope.launch(Dispatchers.Main){
+            binding.btnWxVoice2.startA()
+        }
+        lifecycleScope.launch(Dispatchers.IO){
+            binding.btnWxVoice.addVoiceSize(50)
+        }
         binding.apply {
+//            btnWxVoice.addVoiceSize(60)
+//            btnWxVoice2.addVoiceSize(50)
             text.setOnClickListener {
-                //va()
-
-                startInfiniteAnimation()
+//                btnWxVoice2.setCancel(true)
+//                //va()
+//
+//                //startInfiniteAnimation()
+//
+////                .into(new CustomTarget<Bitmap>() {
+////                @Override
+////                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+////                    imageView.setImage(ImageSource.bitmap(resource));
+////                }
+////
+////                @Override
+////                public void onLoadCleared(@Nullable Drawable placeholder) {
+////                    // 可以在这里处理清除操作
+////                }
+////            });
+//                binding.imageSsi.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
+//
+////                binding.imageSsi.animateScale(binding.imageSsi.maxScale);
+////                binding.imageSsi.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP)
+//                Glide.with(requireActivity())
+//                    .asFile()
+//                    .load(url2)
+//                    .into(object : CustomTarget<File>() {
+//                        override fun onResourceReady(resource: File, p1: Transition<in File>?) {
+//                            android.util.Log.d(TAG, "onResourceReady: $resource")
+//                            binding.imageSsi.setImage(ImageSource.uri(Uri.fromFile(resource)));
+//                            binding.imageSsi.post {
+//                                binding.imageSsi.setScaleAndCenter(binding.imageSsi.maxScale, null);
+//                            }
+//                        }
+//
+//                        override fun onLoadCleared(p0: Drawable?) {
+//                            android.util.Log.d(TAG, "onLoadCleared: $p0")
+//                        }
+//                    })
 
             }
 
             upload.setOnClickListener {
 //                KrLog.sendEmail(activity, null)
                 //sendEmail()
-                job?.cancel()
+//                job?.cancel()
+//
+//                Glide.with(requireActivity())
+//                    .load(url2)
+//                    .into(binding.photoView)
             }
 
         }
@@ -56,7 +110,7 @@ class XlogFragment : BaseFragment() {
     var job: Job? = null
 
     fun startInfiniteAnimation() {
-        if (job != null && job!!.isActive){
+        if (job != null && job!!.isActive) {
             return
         }
         val scoreText = arrayOf(".    ", ". .  ", ". . .", ". . . .", ". . . . .", ". . . . . .")
