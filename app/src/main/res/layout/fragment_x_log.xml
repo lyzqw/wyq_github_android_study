@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/image_ssi"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photoView"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 
     <com.qwlyz.androidstudy.widget.WXVoiceButton
@@ -26,14 +27,48 @@
         android:layout_marginTop="215dp" />
 
 
-    <com.qwlyz.androidstudy.widget.AudioWaveView2
-        android:background="@color/red"
-        android:id="@+id/btn_wx_voice2"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="415dp" />
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/text_press_audio"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="415dp"
+        android:layout_marginEnd="103dp"
+        android:gravity="center"
+        android:text="Hold to talk"
+        app:background_normal="#F3F3F3"
+        app:corner_radius="6dp" />
 
+    <com.ruffian.library.widget.RLinearLayout
+        android:id="@+id/layout_voice"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="415dp"
+        android:visibility="gone"
+        app:background_normal="#FF1E1E"
+        app:corner_radius="30dp">
+
+        <com.qwlyz.androidstudy.widget.AudioWaveView2
+            android:id="@+id/btn_wx_voice2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/text_wave_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </com.ruffian.library.widget.RLinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,10 +88,10 @@
             android:text="upload" />
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <com.qwlyz.androidstudy.DeleteView
                 android:layout_width="50dp"

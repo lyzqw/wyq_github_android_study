@@ -50,7 +50,7 @@ android {
     buildTypes {
         debug {
             debuggable true
-            minifyEnabled false
+            minifyEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -163,6 +163,10 @@ dependencies {
 
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation("com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.14")
+
+    implementation 'androidx.palette:palette:1.0.0' // 使用最新版本
+
 }
 
 apply plugin: 'com.google.gms.google-services'

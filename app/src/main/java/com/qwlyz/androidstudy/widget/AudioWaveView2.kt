@@ -14,7 +14,9 @@ import android.util.Log
 import android.view.View
 import android.view.animation.BounceInterpolator
 import android.view.animation.Interpolator
+import com.blankj.utilcode.util.SizeUtils
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Random
@@ -37,7 +39,7 @@ class AudioWaveView2 @JvmOverloads constructor(
         0.3f,
         0.5f,
         0.8f,
-//        1.0f,
+        1.0f,
 //        0.8f,
 //        0.5f,
 //        0.3f,
@@ -82,8 +84,9 @@ class AudioWaveView2 @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.translate((width / 2).toFloat(), (height / 2).toFloat())
-        drawLine(-20f, canvas)
-        drawLine(20f, canvas)
+        val distance = SizeUtils.dp2px(12f).toFloat()
+        drawLine(-distance, canvas)
+        drawLine(distance, canvas)
     }
 
     private fun drawLine(translateDx: Float, canvas: Canvas) {
@@ -116,14 +119,27 @@ class AudioWaveView2 @JvmOverloads constructor(
         return outMin + (input - inMin) * (outMax - outMin) / (inMax - inMin)
     }
 
-    fun startA() {
+    var waveJob: Job? = null
+    var started = false
+
+    fun start() {
+        if (started){
+            return
+        }
+        waveJob?.cancel()
+        started = true
         val random = Random()
-        GlobalScope.launch {
-            while (true) {
+        waveJob = GlobalScope.launch {
+            while (started) {
                 factor = random.nextFloat()
                 invalidate()
                 delay(200)
             }
         }
+    }
+
+    fun stop() {
+        started = false
+        waveJob?.cancel()
     }
 }

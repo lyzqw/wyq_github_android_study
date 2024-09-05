@@ -20,6 +20,10 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-obfuscationdictionary bt-proguard.txt
+-classobfuscationdictionary bt-proguard.txt
+-packageobfuscationdictionary bt-proguard.txt
+
 # 保留本地native方法不被混淆
 -keepclasseswithmembernames class * {
     native <methods>;

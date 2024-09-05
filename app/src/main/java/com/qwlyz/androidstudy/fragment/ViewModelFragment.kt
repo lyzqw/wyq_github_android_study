@@ -13,6 +13,7 @@ import android.view.TouchDelegate
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.qwlyz.androidstudy.AA
 import com.qwlyz.androidstudy.BB
 import com.qwlyz.androidstudy.BaseFragment
@@ -54,6 +55,19 @@ class ViewModelFragment : BaseFragment() {
 
         binding.cal.setOnClickListener {
             Log.d(TAG, "算法")
+
+//            Glide.with(requireView())
+//                .load(url)
+//                .listener(GlidePalette.with(url)
+//                    .use(GlidePalette.Profile.VIBRANT)
+//                    .intoCallBack { palette ->
+//                        val dominantColor = palette?.getDominantColor(0xFFFFFF) ?: 0xFFFFFF
+//                        // 使用 dominantColor
+//                    }
+//                )
+//                .into(imageView)
+
+
 //            Cal.main()
         }
         binding.send1.setOnClickListener {

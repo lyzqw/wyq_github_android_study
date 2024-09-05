@@ -1,9 +1,13 @@
 package com.qwlyz.androidstudy.fragment
 
 import android.animation.ValueAnimator
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.view.MotionEvent
+import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.FileIOUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PathUtils
@@ -42,10 +46,58 @@ class XlogFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.fragment_x_log
 
+    private fun handleAudioTouchEvent(event: MotionEvent, v: View) {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                //onStartAudioRecord()
+                binding.layoutVoice.visibility = View.VISIBLE
+            }
+
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                //onUpAudioRecord(isAudioShouldCancel(v, event))
+                binding.layoutVoice.visibility = View.GONE
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                onMoveAudioRecord(isAudioShouldCancel(v, event))
+            }
+        }
+    }
+
+    var shouldCancel = false
+
+    private fun onMoveAudioRecord(audioShouldCancel: Boolean) {
+        if (shouldCancel == audioShouldCancel) {
+            return
+        }
+        shouldCancel = audioShouldCancel
+        if (audioShouldCancel) {
+//            binding.textPressSpeak.setDisableState(false)
+//            binding.textPressTip.setTextColor(getCompatColor(R.color.color_FF4A80))
+            binding.layoutVoice.helper.setBackgroundColorNormal(Color.parseColor("#BCBCBC"))
+        } else {
+            binding.layoutVoice.helper.setBackgroundColorNormal(Color.parseColor("#FF1E1E"))
+//            binding.textPressSpeak.setPressState(false)
+//            binding.textPressTip.setTextColor(getCompatColor(R.color.white))
+        }
+    }
+
+    private fun isAudioShouldCancel(view: View, event: MotionEvent): Boolean {
+        val location = IntArray(2)
+        view.getLocationOnScreen(location)
+        return event.rawX < location[0] || event.rawX > location[0] + view.width || event.rawY < location[1] - 40
+    }
+
 
     override fun initData() {
+        binding.textPressAudio.setOnTouchListener { v, event ->
+            handleAudioTouchEvent(event, v)
+            return@setOnTouchListener true
+        }
+        //3”
         lifecycleScope.launch(Dispatchers.Main){
-            binding.btnWxVoice2.startA()
+            binding.btnWxVoice2.start()
+            binding.textWaveTime.text = "3\""
         }
         lifecycleScope.launch(Dispatchers.IO){
             binding.btnWxVoice.addVoiceSize(50)
