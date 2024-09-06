@@ -1,5 +1,6 @@
 package com.qwlyz.androidstudy
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.qwlyz.androidstudy.databinding.ActivityMainBinding
+import com.qwlyz.androidstudy.fragment.GoogleLoginFragment2.Companion.oneTapClient
 import com.tencent.mars.xlog.Log
 import com.yuwq.libs_common.viewBinding
 
@@ -51,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 
     class WidgetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

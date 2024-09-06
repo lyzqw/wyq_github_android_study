@@ -35,65 +35,6 @@ class GoogleLoginFragment : BaseFragment() {
     override fun getLayoutId(): Int = com.qwlyz.androidstudy.R.layout.fragment_google
 
     override fun initData() {
-//        val url  = "https://heartoai.oss-us-east-1.aliyuncs.com/management/2024-08-12/1723452199950.png"
-//        val url = "https://heartoai.oss-us-east-1.aliyuncs.com/management/2024-08-12/1723434805267.jpeg"
-        val url = "https://heartoai.oss-us-east-1.aliyuncs.com/management/2024-08-12/1723461429514.jpeg"
-//        val url = "https://heartoai.oss-us-east-1.aliyuncs.com/management/2024-08-12/1723452351785.jpeg"
-
-//        Glide.with(requireActivity())
-//            .load(url)
-//            .listener(GlidePalette.with(url)
-//                .use(BitmapPalette.Profile.MUTED_LIGHT)
-//                .intoCallBack { palette ->
-//                    val dominantColor = palette?.getDominantColor(ColorUtils.getColor(R.color.Blue)) ?: ColorUtils.getColor(R.color.Blue)
-//                    // 使用 dominantColor
-//                    binding.text.setTextColor(dominantColor)
-//                }
-//            )
-//            .into(binding.image)
-
-
-
-//        Glide.with(this).load(url)
-//            .listener(GlidePalette.with(url)
-//                .use(BitmapPalette.Profile.MUTED_LIGHT)
-//                .intoTextColor(titleView, GlidePalette.Swatch.BODY_TEXT_COLOR)
-//                .crossfade(true)
-//            );
-//        .into(imageView);
-
-        Glide.with(requireView())
-            .load(url)
-            .listener(
-                GlidePalette.with(url)
-                    .use(BitmapPalette.Profile.MUTED_LIGHT)
-                    .intoCallBack { palette ->
-                        val light = palette?.lightVibrantSwatch?.rgb
-                        val domain = palette?.dominantSwatch?.rgb
-                        light?.let { binding.text.setTextColor(it) }
-                        domain?.let { binding.text2.setTextColor(it) }
-//                        binding.text2.setTextColor(Color.parseColor("#ff2830"))
-                        if (domain != null) {
-                            if (light != null) {
-//                                Rainbow(paletteView).palette {
-//                                    +color(domain)
-//                                    +color(light)
-//                                }.background(orientation = RainbowOrientation.TOP_BOTTOM)
-                            } else {
-//                                paletteView.setBackgroundColor(domain)
-                            }
-                            if (context is AppCompatActivity) {
-                                requireActivity().window.apply {
-                                    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                                    statusBarColor = domain
-                                }
-                            }
-                        }
-                    }.crossfade(true),
-            ).into(binding.image)
-
-
-
         // 初始化 FirebaseAuth
         mAuth = FirebaseAuth.getInstance()
 
@@ -139,7 +80,6 @@ class GoogleLoginFragment : BaseFragment() {
 
     fun handleSignInResult(task: Task<GoogleSignInAccount>){
         Log.d(TAG, "handleSignInResult: ${task.result.idToken}")
-
 
 //        val credential = GoogleAuthProvider.getCredential(task.result.idToken, null)
 //        mAuth.signInWithCredential(credential).addOnCompleteListener {
