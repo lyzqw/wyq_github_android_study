@@ -71,10 +71,13 @@ class GoogleLoginFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Google 登录响应
-        if (requestCode == 123123) {
-            val task  = GoogleSignIn.getSignedInAccountFromIntent(data)
+        try {
+            if (requestCode == 123123) {
+                val task  = GoogleSignIn.getSignedInAccountFromIntent(data)
 
-            handleSignInResult(task)
+                handleSignInResult(task)
+            }
+        } catch (e: Exception) {
         }
     }
 

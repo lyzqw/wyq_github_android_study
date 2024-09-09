@@ -19,7 +19,7 @@ enum class PageWidget(val title: String, val pageWidgetClass: Class<*>) : Serial
 //    GlideImageWidget("GlideImage学习", GlideImageFragment::class.java),
 //    IndicatorSeekBarWidget("自定义IndicatorSeekBar", IndicatorSeekBarFragment::class.java),
 //    RTLTopicAtWidget("RTL话题", TopicAtFragment::class.java),
-    google("Google 登录", GoogleLoginFragment2::class.java),
+    google("Google 登录", GoogleLoginFragment::class.java),
     Retrofit2("学习retofit", Retrofit2Fragment::class.java),
 //    IOSConverterAndroid("ios文件转Android", IosConverterAndroidFragment::class.java),
 //    Android11Storage("Android11存储", Android11StorageFragment::class.java),
