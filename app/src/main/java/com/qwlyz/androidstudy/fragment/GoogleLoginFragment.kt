@@ -78,11 +78,12 @@ class GoogleLoginFragment : BaseFragment() {
                 handleSignInResult(task)
             }
         } catch (e: Exception) {
+            println(e.message)
         }
     }
 
     fun handleSignInResult(task: Task<GoogleSignInAccount>){
-        Log.d(TAG, "handleSignInResult: ${task.result.idToken}")
+        println("handleSignInResult: ${task.result.idToken}")
 
 //        val credential = GoogleAuthProvider.getCredential(task.result.idToken, null)
 //        mAuth.signInWithCredential(credential).addOnCompleteListener {
